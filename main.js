@@ -24,9 +24,6 @@
       notePending: "Thank you! Your note will appear once it's approved.",
       err: "Something went wrong. Please try again in a moment.",
       required: "Please fill in the required fields.",
-      give: "I'll get this", taken: "Taken", view: "View",
-      giveAsk: "Your name, so we know who's bringing it:",
-      giveOk: "Thank you! It's marked as yours.",
       noSongs: "No requests yet. Be the first!",
       noNotes: "No notes yet. Leave the first one!",
       demo: "Demo mode: saved only in this browser.",
@@ -44,9 +41,6 @@
       notePending: "¡Gracias! Tu mensajito aparecerá cuando sea aprobado.",
       err: "Algo salió mal. Intenta de nuevo en un momento.",
       required: "Por favor completa los campos obligatorios.",
-      give: "Yo lo regalo", taken: "Apartado", view: "Ver",
-      giveAsk: "Tu nombre, para saber quién lo trae:",
-      giveOk: "¡Gracias! Quedó apartado a tu nombre.",
       noSongs: "Aún no hay canciones. ¡Sé el primero!",
       noNotes: "Aún no hay mensajitos. ¡Deja el primero!",
       demo: "Modo demo: se guarda solo en este navegador.",
@@ -85,7 +79,6 @@
     const items = demoGet(p.kind);
     const key = (p.guest || p.name || "").trim().toLowerCase();
     if (p.kind === "song" && items.some(i => i.key === key)) return { ok: false, error: "duplicate" };
-    if (p.kind === "gift" && items.some(i => i.giftId === p.giftId)) return { ok: false, error: "taken" };
     items.push(Object.assign({ key, time: new Date().toISOString() }, p));
     localStorage.setItem("gabs-demo-" + p.kind, JSON.stringify(items));
     return { ok: true, approved: true };
@@ -241,58 +234,12 @@
   }
 
   /* ==========================================================
-     Gifts
+     Wish list: one button to the external list (config.js)
      ========================================================== */
-  const giftGrid = $("#gift-grid");
-  async function renderGifts() {
-    if (!giftGrid) return;
-    let taken = [];
-    if (CFG.giftReservations) { try { taken = (await api.list("gift")).map(g => g.giftId); } catch (e) { /* show all as free */ } }
-    giftGrid.innerHTML = "";
-    (CFG.gifts || []).forEach((g, i) => {
-      const el = document.createElement("article");
-      el.className = "gift reveal";
-      el.style.setProperty("--i", i);
-      el.dataset.id = g.id;
-      const palette = ["var(--dogrose)", "var(--honeysuckle)", "var(--cowslip)"];
-      el.innerHTML = `
-        <div class="gift-img"></div>
-        <span class="taken-tag"></span>
-        <div class="gift-label"></div>
-        <div class="gift-actions"></div>`;
-      $(".gift-img", el).style.background = `url("${ROOT}${g.img}") center / cover no-repeat, ${palette[i % 3]}`;
-      $(".taken-tag", el).textContent = STR.taken;
-      $(".gift-label", el).textContent = (g.name && g.name[LANG]) || "";
-      const actions = $(".gift-actions", el);
-      if (g.url && g.url !== "#") {
-        const a = document.createElement("a");
-        a.className = "btn ghost"; a.href = g.url; a.target = "_blank"; a.rel = "noopener"; a.textContent = STR.view;
-        actions.appendChild(a);
-      }
-      if (CFG.giftReservations) {
-        const b = document.createElement("button");
-        b.className = "btn"; b.type = "button"; b.textContent = STR.give;
-        b.addEventListener("click", () => reserveGift(g, el, b));
-        actions.appendChild(b);
-      }
-      if (taken.includes(g.id)) markTaken(el);
-      giftGrid.appendChild(el);
-      watch(el);
-    });
-  }
-  function markTaken(el) {
-    el.classList.add("taken");
-    $$(".gift-actions button", el).forEach(b => { b.disabled = true; b.textContent = STR.taken; b.style.cursor = "default"; });
-  }
-  async function reserveGift(g, el, btn) {
-    const name = (window.prompt(STR.giveAsk) || "").trim();
-    if (!name) return;
-    btn.disabled = true; btn.textContent = STR.sending;
-    try {
-      const r = await api.send("gift", { giftId: g.id, name: name.slice(0, 80) });
-      if (r.ok || r.error === "taken") { markTaken(el); if (r.ok) flash($("#gift-msg"), STR.giveOk, "ok"); }
-      else throw new Error(r.error);
-    } catch (e) { btn.disabled = false; btn.textContent = STR.give; flash($("#gift-msg"), STR.err, "err"); }
+  const wishlist = $("#wishlist-link");
+  if (wishlist) {
+    if (CFG.wishlistUrl && CFG.wishlistUrl !== "#") wishlist.href = CFG.wishlistUrl;
+    else wishlist.removeAttribute("target");
   }
 
   /* ==========================================================
@@ -360,7 +307,7 @@
       items.slice().reverse().forEach((s, i) => {
         const li = document.createElement("li");
         li.className = "reveal"; li.style.setProperty("--i", Math.min(i, 6));
-        li.innerHTML = `<svg class="flower" aria-hidden="true"><use href="#flower"/></svg><span><b></b> · <span></span></span><small></small>`;
+        li.innerHTML = `<svg class="icon" aria-hidden="true"><use href="#i-note"/></svg><span><b></b> · <span></span></span><small></small>`;
         $("b", li).textContent = s.title;
         $("span > span", li).textContent = s.artist;
         $("small", li).textContent = `${STR.by} ${s.name}`;
@@ -401,7 +348,6 @@
 
   if (DEMO) $$(".demo-note").forEach(el => { el.textContent = STR.demo; el.hidden = false; });
 
-  renderGifts();
   loadSongs();
   loadWall();
 })();

@@ -4,17 +4,17 @@
    ========================================================== */
 :root {
   --hawthorn: #F9F8F4;   /* page background, cards */
-  --ivy: #40654A;        /* success, focus */
+  --ivy: #40654A;        /* location, card, focus */
   --gorse: #C4A524;      /* countdown band */
-  --cowslip: #E4C259;    /* flower icon */
+  --cowslip: #E4C259;    /* card, song icons */
   --birch: #D5DCDF;      /* RSVP band */
-  --honeysuckle: #ED9F77;/* tagline band */
-  --dogrose: #DCA3B9;    /* labels, soft highlights */
-  --blackthorn: #224653; /* text, footer */
-  --foxglove: #D2437A;   /* headings, buttons */
+  --honeysuckle: #ED9F77;/* tagline band, card */
+  --dogrose: #DCA3B9;    /* accent: footer links */
+  --blackthorn: #224653; /* PRIMARY: headings, buttons, text, footer */
+  --foxglove: #D2437A;   /* ACCENT only: eyebrows, hovers, small details */
   --willow: #86915D;     /* song band */
   --rowan: #E65855;      /* hover, accents */
-  --copper: #C45524;     /* flower icon */
+  --copper: #C45524;     /* about heading */
 
   --font-display: "Fraunces", Georgia, serif;
   --font-body: "DM Sans", system-ui, sans-serif;
@@ -35,11 +35,11 @@ body {
 }
 body.locked { overflow: hidden; }
 img { max-width: 100%; display: block; }
-a { color: var(--foxglove); }
-a:hover { color: var(--rowan); }
+a { color: var(--blackthorn); }
+a:hover { color: var(--foxglove); }
 
 h1, h2, h3 { font-family: var(--font-display); font-weight: 600; line-height: 1.15; margin: 0 0 .4em; }
-h2 { font-size: clamp(2rem, 4.5vw, 3rem); font-style: italic; color: var(--foxglove); text-align: center; }
+h2 { font-size: clamp(2rem, 4.5vw, 3rem); font-style: italic; color: var(--blackthorn); text-align: center; }
 .eyebrow {
   display: block; text-align: center; text-transform: uppercase;
   letter-spacing: .22em; font-size: .75rem; color: var(--foxglove); opacity: .8; margin-bottom: 2.2rem;
@@ -52,24 +52,19 @@ section { position: relative; }
 .btn {
   display: inline-flex; align-items: center; gap: .5em;
   font: 600 .85rem/1 var(--font-body); letter-spacing: .14em; text-transform: uppercase;
-  padding: 1.05em 2em; border-radius: 999px; border: 2px solid var(--foxglove);
-  background: var(--foxglove); color: var(--hawthorn); cursor: pointer; text-decoration: none;
+  padding: 1.05em 2em; border-radius: 999px; border: 2px solid var(--blackthorn);
+  background: var(--blackthorn); color: var(--hawthorn); cursor: pointer; text-decoration: none;
   transition: transform .25s ease, background .25s ease, border-color .25s ease, color .25s ease;
 }
-.btn:hover { background: var(--rowan); border-color: var(--rowan); color: var(--hawthorn); transform: translateY(-2px); }
+.btn:hover { background: var(--foxglove); border-color: var(--foxglove); color: var(--hawthorn); transform: translateY(-2px); }
 .btn.ghost { background: transparent; color: inherit; border-color: currentColor; }
 .btn.ghost:hover { background: var(--hawthorn); color: var(--blackthorn); border-color: var(--hawthorn); }
 .btn:disabled { opacity: .55; cursor: wait; transform: none; }
 .btn-row { display: flex; flex-wrap: wrap; gap: .8rem; justify-content: center; }
 
-/* ---------- flower icon ---------- */
-.flower { width: 1em; height: 1em; display: inline-block; }
-.f-rose { color: var(--dogrose); }
-.f-copper { color: var(--copper); }
-.f-cowslip { color: var(--cowslip); }
-.f-willow { color: var(--willow); }
-.f-fox { color: var(--foxglove); }
-.f-honey { color: var(--honeysuckle); }
+/* ---------- icons ---------- */
+.flower, .icon { width: 1em; height: 1em; display: inline-block; }
+.icon { fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
 
 /* ---------- splash ---------- */
 .splash {
@@ -79,8 +74,8 @@ section { position: relative; }
   transition: opacity .9s ease, visibility .9s ease;
 }
 .splash.gone { opacity: 0; visibility: hidden; }
-.splash .flower { font-size: 5rem; color: var(--foxglove); animation: spin 14s linear infinite; }
-.splash h1 { font-size: clamp(2.4rem, 7vw, 4.2rem); font-style: italic; color: var(--foxglove); margin-top: 1.2rem; }
+.splash .flower { font-size: 3.2rem; color: var(--foxglove); animation: spin 14s linear infinite; }
+.splash h1 { font-size: clamp(2.4rem, 7vw, 4.2rem); font-style: italic; color: var(--blackthorn); margin-top: 1.2rem; }
 .splash p { margin: 0 0 2rem; }
 .splash .skip { display: block; margin-top: 1.2rem; background: none; border: 0; color: var(--blackthorn); opacity: .7; text-decoration: underline; cursor: pointer; font: inherit; font-size: .9rem; }
 .splash .lang { position: absolute; top: 1.2rem; right: 1.4rem; font-size: .85rem; letter-spacing: .1em; }
@@ -104,11 +99,11 @@ section { position: relative; }
 .music-btn {
   position: fixed; right: 1.2rem; bottom: 1.2rem; z-index: 60;
   width: 52px; height: 52px; border-radius: 50%; border: 0;
-  background: var(--foxglove); color: var(--hawthorn); cursor: pointer;
-  display: grid; place-items: center; box-shadow: 0 6px 20px rgba(210, 67, 122, .35);
+  background: var(--blackthorn); color: var(--hawthorn); cursor: pointer;
+  display: grid; place-items: center; box-shadow: 0 6px 20px rgba(34, 70, 83, .35);
   transition: transform .2s ease, background .2s ease;
 }
-.music-btn:hover { transform: scale(1.07); background: var(--rowan); }
+.music-btn:hover { transform: scale(1.07); background: var(--foxglove); }
 .music-btn svg { width: 22px; height: 22px; }
 .music-btn .bars { display: flex; gap: 3px; align-items: flex-end; height: 18px; }
 .music-btn .bars i { width: 3px; background: currentColor; border-radius: 2px; animation: eq 1s ease-in-out infinite; }
@@ -128,12 +123,9 @@ section { position: relative; }
   background:
     linear-gradient(rgba(34, 70, 83, .12), rgba(34, 70, 83, .3)),
     url("assets/img/hero.jpg") center / cover no-repeat,
-    radial-gradient(circle at 18% 28%, var(--honeysuckle) 0 9%, transparent 10%),
-    radial-gradient(circle at 78% 22%, var(--dogrose) 0 12%, transparent 13%),
-    radial-gradient(circle at 62% 74%, var(--cowslip) 0 10%, transparent 11%),
-    radial-gradient(circle at 25% 80%, var(--rowan) 0 8%, transparent 9%),
-    radial-gradient(circle at 90% 65%, var(--copper) 0 7%, transparent 8%),
-    linear-gradient(135deg, var(--foxglove), var(--honeysuckle));
+    radial-gradient(ellipse at 82% 18%, rgba(228, 194, 89, .45), transparent 45%),
+    radial-gradient(ellipse at 12% 88%, rgba(237, 159, 119, .4), transparent 50%),
+    linear-gradient(160deg, var(--blackthorn) 10%, var(--ivy) 75%, var(--willow));
 }
 .hero-inner { position: relative; z-index: 1; padding: 6rem 1.5rem 4rem; }
 .hero .kicker { text-transform: uppercase; letter-spacing: .3em; font-size: .8rem; }
@@ -149,12 +141,6 @@ section { position: relative; }
 .band-honey { background: var(--honeysuckle); padding: 3.2rem 0; }
 .band-honey p.big { margin-bottom: 0; font-size: clamp(1.2rem, 2.6vw, 1.7rem); }
 .band-gorse { background: var(--gorse); }
-.band-gorse .float-flower { position: absolute; font-size: clamp(4rem, 10vw, 7.5rem); }
-.band-gorse .ff-1 { right: 9%; top: 12%; color: var(--dogrose); }
-.band-gorse .ff-2 { left: 8%; bottom: 10%; color: var(--dogrose); font-size: clamp(5rem, 13vw, 9.5rem); }
-.band-gorse .ff-1 .flower, .band-gorse .ff-2 .flower { animation: sway 6s ease-in-out infinite; }
-.band-gorse .ff-2 .flower { animation-delay: -3s; }
-@keyframes sway { 0%, 100% { transform: rotate(-8deg); } 50% { transform: rotate(10deg); } }
 @keyframes spin { to { transform: rotate(360deg); } }
 
 .countdown { display: flex; justify-content: center; gap: clamp(.8rem, 3vw, 2.2rem); margin: 0 0 2.2rem; }
@@ -162,7 +148,7 @@ section { position: relative; }
 .countdown b { display: block; font-family: var(--font-display); font-size: clamp(2.4rem, 7vw, 4rem); line-height: 1; }
 .countdown span { font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; }
 .band-gorse .btn { background: var(--hawthorn); border-color: var(--hawthorn); color: var(--blackthorn); }
-.band-gorse .btn:hover { background: var(--foxglove); border-color: var(--foxglove); color: var(--hawthorn); }
+.band-gorse .btn:hover { background: var(--blackthorn); border-color: var(--blackthorn); color: var(--hawthorn); }
 
 /* ---------- details cards ---------- */
 .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.6rem; max-width: 900px; margin: 0 auto; }
@@ -172,12 +158,12 @@ section { position: relative; }
   transition: transform .3s ease, box-shadow .3s ease;
 }
 .card:hover { transform: translateY(-6px); box-shadow: 0 18px 40px rgba(34, 70, 83, .12); }
-.card .card-top { aspect-ratio: 4 / 3; display: grid; place-items: center; font-size: 4.5rem; }
-.card:nth-child(1) .card-top { background: var(--dogrose); color: var(--hawthorn); }
+.card .card-top { aspect-ratio: 4 / 3; display: grid; place-items: center; font-size: 3.6rem; }
+.card:nth-child(1) .card-top { background: var(--ivy); color: var(--hawthorn); }
 .card:nth-child(2) .card-top { background: var(--honeysuckle); color: var(--hawthorn); }
-.card:nth-child(3) .card-top { background: var(--cowslip); color: var(--hawthorn); }
+.card:nth-child(3) .card-top { background: var(--cowslip); color: var(--blackthorn); }
 .card .card-body { padding: 1.3rem 1rem 1.6rem; }
-.card h3 { font-size: .78rem; font-family: var(--font-body); letter-spacing: .2em; text-transform: uppercase; color: var(--foxglove); margin-bottom: .5em; }
+.card h3 { font-size: .78rem; font-family: var(--font-body); letter-spacing: .2em; text-transform: uppercase; color: var(--foxglove); margin-bottom: .5em; } /* accent */
 .card p { margin: 0; font-family: var(--font-display); font-size: 1.25rem; }
 .card small { display: block; margin-top: .3em; opacity: .75; }
 .details-cta { text-align: center; margin-top: 2.6rem; }
@@ -198,26 +184,11 @@ section { position: relative; }
 .location-photo .btn-row { justify-content: flex-start; }
 .map { width: 100%; height: 380px; border: 0; display: block; filter: saturate(.85); }
 
-/* ---------- flower divider ---------- */
-.divider { display: flex; justify-content: space-around; align-items: center; padding: 1.1rem .5rem; font-size: clamp(1.8rem, 4vw, 2.6rem); background: var(--hawthorn); }
-.divider .flower { transition: transform .6s ease; }
-.divider span:hover .flower { transform: rotate(90deg) scale(1.15); }
 
 /* ---------- gifts ---------- */
-.gifts { display: grid; grid-template-columns: repeat(3, 1fr); }
-.gift { position: relative; display: flex; flex-direction: column; border-right: 2px solid var(--hawthorn); }
-.gift:last-child { border-right: 0; }
-.gift-img { aspect-ratio: 4 / 5; background-size: cover; background-position: center; position: relative; overflow: hidden; }
-.gift-img::after { content: ""; position: absolute; inset: 0; background: rgba(34, 70, 83, 0); transition: background .3s ease; }
-.gift:hover .gift-img::after { background: rgba(34, 70, 83, .18); }
-.gift-label { background: var(--dogrose); color: var(--hawthorn); text-align: center; padding: .85rem 1rem; text-transform: uppercase; letter-spacing: .2em; font-size: .78rem; font-weight: 700; }
-.gift-actions { display: flex; justify-content: center; gap: .6rem; flex-wrap: wrap; padding: 1rem; background: var(--hawthorn); }
-.gift-actions .btn { padding: .8em 1.3em; font-size: .72rem; }
-.gift.taken .gift-img { filter: grayscale(.7) opacity(.7); }
-.gift .taken-tag { position: absolute; top: 1rem; left: 1rem; background: var(--ivy); color: var(--hawthorn); border-radius: 999px; padding: .35em .9em; font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; display: none; }
-.gift.taken .taken-tag { display: inline-block; }
-.gifts-note { text-align: center; margin: 2rem auto 0; max-width: 50ch; }
-@media (max-width: 760px) { .gifts { grid-template-columns: 1fr; } .gift { border-right: 0; border-bottom: 2px solid var(--hawthorn); } }
+.gifts-box { text-align: center; }
+.gifts-box .gift-icon { font-size: 3rem; color: var(--copper); margin-bottom: 1rem; }
+.gifts-box p { max-width: 44ch; margin: 0 auto 2rem; }
 
 /* ---------- forms ---------- */
 .band-birch { background: var(--birch); }
@@ -240,7 +211,7 @@ fieldset.field { border: 0; padding: 0; margin: 0; }
 .choices label { text-transform: none; letter-spacing: 0; font-size: 1rem; font-weight: 500; }
 .choices input { position: absolute; opacity: 0; pointer-events: none; }
 .choices span { display: inline-block; padding: .7rem 1.3rem; border-radius: 999px; background: var(--hawthorn); cursor: pointer; border: 2px solid transparent; transition: all .2s ease; }
-.choices input:checked + span { background: var(--foxglove); color: var(--hawthorn); }
+.choices input:checked + span { background: var(--blackthorn); color: var(--hawthorn); }
 .choices input:focus-visible + span { border-color: var(--ivy); }
 .form .btn { justify-self: center; margin-top: .4rem; }
 .form-msg { text-align: center; min-height: 1.6em; margin: 0; font-weight: 600; }
@@ -248,14 +219,15 @@ fieldset.field { border: 0; padding: 0; margin: 0; }
 .form-msg.err { color: var(--rowan); }
 .band-willow .form-msg.ok, .band-willow .form-msg.err { color: var(--hawthorn); }
 .thanks { text-align: center; display: none; }
-.thanks .flower { font-size: 3.5rem; color: var(--foxglove); animation: spin 10s linear infinite; }
+.thanks .icon { font-size: 3.2rem; color: var(--ivy); }
+.band-willow .thanks .icon { color: var(--hawthorn); }
 .done .thanks { display: block; }
 .done form { display: none; }
 
 /* song list */
 .song-list { list-style: none; padding: 0; margin: 2.6rem auto 0; max-width: 560px; display: grid; gap: .55rem; }
 .song-list li { display: flex; align-items: center; gap: .8rem; background: rgba(249, 248, 244, .14); border-radius: 10px; padding: .7rem 1rem; }
-.song-list li .flower { font-size: 1.3rem; color: var(--cowslip); flex: none; }
+.song-list li .icon { font-size: 1.3rem; color: var(--cowslip); flex: none; }
 .song-list li b { font-weight: 600; }
 .song-list li small { margin-left: auto; opacity: .8; white-space: nowrap; }
 
@@ -283,9 +255,8 @@ fieldset.field { border: 0; padding: 0; margin: 0; }
   min-height: 420px;
   background:
     url("assets/img/about.jpg") center / cover no-repeat,
-    radial-gradient(circle at 30% 35%, var(--cowslip) 0 12%, transparent 13%),
-    radial-gradient(circle at 70% 65%, var(--rowan) 0 15%, transparent 16%),
-    linear-gradient(135deg, var(--dogrose), var(--honeysuckle));
+    radial-gradient(ellipse at 75% 20%, rgba(228, 194, 89, .5), transparent 50%),
+    linear-gradient(150deg, var(--willow), var(--ivy));
 }
 .about-text { padding: clamp(2.5rem, 6vw, 5rem); align-self: center; }
 .about-text h2 { text-align: left; color: var(--copper); }
@@ -294,7 +265,6 @@ fieldset.field { border: 0; padding: 0; margin: 0; }
 
 /* ---------- footer ---------- */
 .site-footer { background: var(--blackthorn); color: var(--hawthorn); text-align: center; padding: 3.5rem 1rem 4.5rem; }
-.site-footer .flower { font-size: 2rem; color: var(--dogrose); }
 .site-footer p { margin: .6rem 0; }
 .site-footer a { color: var(--dogrose); }
 
@@ -323,9 +293,6 @@ fieldset.field { border: 0; padding: 0; margin: 0; }
 /* ---------- small screens ---------- */
 @media (max-width: 760px) {
   .card .card-top { aspect-ratio: 16 / 7; font-size: 3rem; }
-  .gift-img { aspect-ratio: 4 / 3; }
-  .band-gorse .ff-1 { top: 4%; right: 4%; font-size: 3.2rem; }
-  .band-gorse .ff-2 { bottom: 4%; left: 4%; font-size: 3.8rem; }
   .countdown div { min-width: 3.6rem; }
   .map { height: 300px; }
 }

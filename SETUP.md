@@ -7,8 +7,8 @@ Google Fonts (Fraunces and DM Sans) and the Google Maps embed.
 index.html        English page (site root)
 es/index.html     Spanish page (/es)
 styles.css        palette, layout, scroll animations
-main.js           splash, music, countdown, forms, gifts, wall
-config.js         <- party details: date, time, venue, gifts, Sheets URL
+main.js           splash, music, countdown, forms, wish list link, wall
+config.js         <- party details: date, time, venue, wish list URL, Sheets URL
 apps-script/      Google Sheets backend (Code.gs)
 assets/img/       photos
 assets/audio/     song
@@ -18,7 +18,7 @@ _build/           page text in both languages + the script that writes the two p
 ## 1. Fill in the details
 
 Open `config.js` and replace the placeholders: start and end time, dress code,
-venue, address, map search text, RSVP deadline, and the gift list. Both pages
+venue, address, map search text, RSVP deadline, and the link to the wish list (`wishlistUrl`). Both pages
 read from this one file, so dates and times show in the right language
 automatically.
 
@@ -31,10 +31,7 @@ Put these files in place (same names), and they replace the painted placeholders
 | `assets/img/hero.jpg` | Portada (full screen) | Landscape, about 2000px wide, under 500 KB |
 | `assets/img/venue.jpg` | Location section | Landscape |
 | `assets/img/about.jpg` | "About Gabs" | Portrait or square |
-| `assets/img/gift-1.jpg` … `gift-3.jpg` | Gift tiles | Portrait (4:5) |
 | `assets/audio/song.mp3` | Plays after "Open invitation" | MP3 under 5 MB |
-
-More gifts: add entries to `gifts` in `config.js` (rows of three look best).
 
 ## 3. Change the page text (optional)
 

@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="../styles.css">
 </head>
 <body>
-  <!-- One flower shape, reused everywhere with <use href="#flower"> -->
+  <!-- Shared icons, reused with <use href="#name"> -->
   <svg width="0" height="0" style="position:absolute" aria-hidden="true">
     <symbol id="flower" viewBox="0 0 100 100">
       <g fill="currentColor">
@@ -26,6 +26,13 @@
       </g>
       <circle cx="50" cy="50" r="14" fill="#F9F8F4" opacity=".9"/>
     </symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></symbol>
+    <symbol id="i-dress" viewBox="0 0 24 24"><path d="M9 3h6l-1 4 5 13H5l5-13z"/><path d="M10 7h4"/></symbol>
+    <symbol id="i-gift" viewBox="0 0 24 24"><rect x="3.5" y="9" width="17" height="11" rx="1.5"/><path d="M2.5 9h19M12 9v11M12 9c-1.5-4-6-4-6-1.5S10 9 12 9zm0 0c1.5-4 6-4 6-1.5S14 9 12 9z"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.7 2.7L16 9.8"/></symbol>
+    <symbol id="i-note" viewBox="0 0 24 24"><path d="M9 18V5l11-2v13"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="17.5" cy="16" r="2.5"/></symbol>
+    <symbol id="i-external" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></symbol>
   </svg>
 
   <!-- ===== Splash: the tap here is what lets the song play ===== -->
@@ -85,7 +92,7 @@
         <span class="eyebrow reveal">aparta la fecha</span>
         <div class="cards">
           <article class="card reveal" style="--i:0">
-            <div class="card-top"><svg class="flower" aria-hidden="true"><use href="#flower"/></svg></div>
+            <div class="card-top"><svg class="icon" aria-hidden="true"><use href="#i-calendar"/></svg></div>
             <div class="card-body">
               <h3>Fecha</h3>
               <p data-cfg="date">Fecha por anunciar</p>
@@ -93,7 +100,7 @@
             </div>
           </article>
           <article class="card reveal" style="--i:1">
-            <div class="card-top"><svg class="flower" aria-hidden="true"><use href="#flower"/></svg></div>
+            <div class="card-top"><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg></div>
             <div class="card-body">
               <h3>Hora</h3>
               <p data-cfg="time">Hora por anunciar</p>
@@ -101,7 +108,7 @@
             </div>
           </article>
           <article class="card reveal" style="--i:2">
-            <div class="card-top"><svg class="flower" aria-hidden="true"><use href="#flower"/></svg></div>
+            <div class="card-top"><svg class="icon" aria-hidden="true"><use href="#i-dress"/></svg></div>
             <div class="card-body">
               <h3>Vestimenta</h3>
               <p data-cfg="dress">Código de vestimenta por anunciar</p>
@@ -117,8 +124,6 @@
 
     <!-- ===== Countdown band ===== -->
     <section class="band band-gorse pad">
-      <span class="float-flower ff-1 reveal pop" aria-hidden="true"><svg class="flower"><use href="#flower"/></svg></span>
-      <span class="float-flower ff-2 reveal pop" style="--i:2" aria-hidden="true"><svg class="flower"><use href="#flower"/></svg></span>
       <div class="wrap">
         <p class="big reveal">ya empezó la cuenta regresiva</p>
         <div class="countdown" id="countdown" aria-live="off"></div>
@@ -142,24 +147,15 @@
       <iframe class="map" id="map" title="Mapa de la fiesta" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </section>
 
-    <!-- ===== Flower divider ===== -->
-    <div class="divider" aria-hidden="true">
-      <span class="f-rose reveal pop" style="--i:0"><svg class="flower"><use href="#flower"/></svg></span>
-      <span class="f-copper reveal pop" style="--i:1"><svg class="flower"><use href="#flower"/></svg></span>
-      <span class="f-cowslip reveal pop" style="--i:2"><svg class="flower"><use href="#flower"/></svg></span>
-      <span class="f-willow reveal pop" style="--i:3"><svg class="flower"><use href="#flower"/></svg></span>
-      <span class="f-fox reveal pop" style="--i:4"><svg class="flower"><use href="#flower"/></svg></span>
-      <span class="f-honey reveal pop" style="--i:5"><svg class="flower"><use href="#flower"/></svg></span>
-      <span class="f-rose reveal pop" style="--i:6"><svg class="flower"><use href="#flower"/></svg></span>
-      <span class="f-copper reveal pop" style="--i:7"><svg class="flower"><use href="#flower"/></svg></span>
-    </div>
-
     <!-- ===== Gifts ===== -->
-    <section id="gifts" class="pad" style="padding-bottom:0">
-      <h2 class="reveal">lista de regalos</h2>
-      <span class="eyebrow reveal">algunas ideas, si quieres</span>
-      <div class="gifts" id="gift-grid"></div>
-      <p class="form-msg" id="gift-msg" aria-live="polite"></p>
+    <section id="gifts" class="pad">
+      <div class="wrap gifts-box">
+        <svg class="icon gift-icon reveal pop" aria-hidden="true"><use href="#i-gift"/></svg>
+        <h2 class="reveal">lista de regalos</h2>
+        <span class="eyebrow reveal">algunas ideas, si quieres</span>
+        <p class="reveal">Tu compañía es el mejor regalo. Si aun así quieres traer algo, en su lista hay algunas ideas.</p>
+        <a class="btn reveal" id="wishlist-link" href="#" target="_blank" rel="noopener">Ver la lista de regalos <svg class="icon" aria-hidden="true"><use href="#i-external"/></svg></a>
+      </div>
     </section>
 
     <!-- ===== RSVP ===== -->
@@ -194,7 +190,7 @@
           <p class="form-msg demo-note" hidden></p>
         </form>
         <div class="thanks" aria-live="polite">
-          <svg class="flower" aria-hidden="true"><use href="#flower"/></svg>
+          <svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>
           <h2>¡gracias!</h2>
           <p>Tu respuesta quedó guardada. ¡Nos vemos pronto!</p>
         </div>
@@ -225,7 +221,7 @@
           <p class="form-msg" aria-live="polite"></p>
         </form>
         <div class="thanks" aria-live="polite">
-          <svg class="flower" aria-hidden="true"><use href="#flower"/></svg>
+          <svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>
           <p>Tu canción ya está en la lista. ¡Nos vemos en la pista!</p>
         </div>
         <ul class="song-list" id="song-list" aria-label="Canciones pedidas"></ul>
@@ -265,7 +261,6 @@
   </main>
 
   <footer class="site-footer">
-    <svg class="flower" aria-hidden="true"><use href="#flower"/></svg>
     <p data-cfg="fullDate">Fecha por anunciar</p>
     <p>Hecho con amor por Jose</p>
     <p><a href="../" hreflang="en">English version</a></p>

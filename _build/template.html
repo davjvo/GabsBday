@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="{{lang}}" data-root="{{root}}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{title}}</title>
+  <meta name="description" content="{{description}}">
+  <meta property="og:title" content="{{title}}">
+  <meta property="og:description" content="{{description}}">
+  <meta property="og:image" content="{{root}}assets/img/hero.jpg">
+  <link rel="alternate" hreflang="en" href="{{root}}">
+  <link rel="alternate" hreflang="es" href="{{root}}es/">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cg fill='%23D2437A'%3E%3Ccircle cx='50' cy='24' r='19'/%3E%3Ccircle cx='74.7' cy='42' r='19'/%3E%3Ccircle cx='65.3' cy='71' r='19'/%3E%3Ccircle cx='34.7' cy='71' r='19'/%3E%3Ccircle cx='25.3' cy='42' r='19'/%3E%3C/g%3E%3Ccircle cx='50' cy='50' r='14' fill='%23F9F8F4'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500;1,9..144,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{root}}styles.css">
+</head>
+<body>
+  <!-- One flower shape, reused everywhere with <use href="#flower"> -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="flower" viewBox="0 0 100 100">
+      <g fill="currentColor">
+        <circle cx="50" cy="24" r="19"/><circle cx="74.7" cy="42" r="19"/><circle cx="65.3" cy="71" r="19"/>
+        <circle cx="34.7" cy="71" r="19"/><circle cx="25.3" cy="42" r="19"/>
+      </g>
+      <circle cx="50" cy="50" r="14" fill="#F9F8F4" opacity=".9"/>
+    </symbol>
+  </svg>
+
+  <!-- ===== Splash: the tap here is what lets the song play ===== -->
+  <div class="splash" id="splash" role="dialog" aria-modal="true" aria-labelledby="splash-title">
+    <a class="lang" href="{{altHref}}" hreflang="{{altLang}}">{{altLabel}}</a>
+    <div>
+      <svg class="flower" aria-hidden="true"><use href="#flower"/></svg>
+      <h1 id="splash-title">{{splashTitle}}</h1>
+      <p>{{splashText}}</p>
+      <button class="btn" id="enter" type="button">{{splashButton}}</button>
+      <button class="skip" id="enter-silent" type="button">{{splashSilent}}</button>
+    </div>
+  </div>
+
+  <header class="topbar">
+    <a class="brand" href="#top">Gabs</a>
+    <nav aria-label="{{navLabel}}">
+      <a href="#details">{{navDetails}}</a>
+      <a href="#location">{{navLocation}}</a>
+      <a href="#gifts">{{navGifts}}</a>
+      <a href="#rsvp">RSVP</a>
+      <a href="#wall">{{navWall}}</a>
+      <a class="lang-switch" href="{{altHref}}" hreflang="{{altLang}}">{{altShort}}</a>
+    </nav>
+  </header>
+
+  <button class="music-btn paused" id="music-btn" type="button" aria-label="{{musicLabel}}" aria-pressed="false" hidden>
+    <span class="bars" aria-hidden="true"><i></i><i></i><i></i></span>
+  </button>
+
+  <main id="top">
+    <!-- ===== Portada ===== -->
+    <section class="hero">
+      <div class="hero-bg" aria-hidden="true"></div>
+      <div class="hero-inner">
+        <p class="kicker reveal">{{heroKicker}}</p>
+        <h1 class="reveal zoom" style="--i:1">Gabs</h1>
+        <p class="sub reveal" style="--i:2"><span data-cfg="fullDate">{{phDate}}</span></p>
+        <a class="btn ghost reveal" style="--i:3" href="#rsvp">{{heroButton}}</a>
+      </div>
+      <a class="scroll-cue" href="#details" aria-label="{{scrollLabel}}">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+      </a>
+    </section>
+
+    <!-- ===== Tagline band ===== -->
+    <section class="band band-honey">
+      <div class="wrap">
+        <p class="big reveal"><span class="ph">{{tagline}}</span></p>
+      </div>
+    </section>
+
+    <!-- ===== Details ===== -->
+    <section class="pad" id="details">
+      <div class="wrap">
+        <h2 class="reveal">{{detailsTitle}}</h2>
+        <span class="eyebrow reveal">{{detailsEyebrow}}</span>
+        <div class="cards">
+          <article class="card reveal" style="--i:0">
+            <div class="card-top"><svg class="flower" aria-hidden="true"><use href="#flower"/></svg></div>
+            <div class="card-body">
+              <h3>{{cardDate}}</h3>
+              <p data-cfg="date">{{phDate}}</p>
+              <small data-cfg="weekday"></small>
+            </div>
+          </article>
+          <article class="card reveal" style="--i:1">
+            <div class="card-top"><svg class="flower" aria-hidden="true"><use href="#flower"/></svg></div>
+            <div class="card-body">
+              <h3>{{cardTime}}</h3>
+              <p data-cfg="time">{{phTime}}</p>
+              <small>{{untilWord}} <span data-cfg="timeEnd"></span></small>
+            </div>
+          </article>
+          <article class="card reveal" style="--i:2">
+            <div class="card-top"><svg class="flower" aria-hidden="true"><use href="#flower"/></svg></div>
+            <div class="card-body">
+              <h3>{{cardDress}}</h3>
+              <p data-cfg="dress">{{phDress}}</p>
+              <small data-cfg="dressNote"></small>
+            </div>
+          </article>
+        </div>
+        <div class="details-cta reveal">
+          <button class="btn" id="add-cal" type="button">{{addCal}}</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Countdown band ===== -->
+    <section class="band band-gorse pad">
+      <span class="float-flower ff-1 reveal pop" aria-hidden="true"><svg class="flower"><use href="#flower"/></svg></span>
+      <span class="float-flower ff-2 reveal pop" style="--i:2" aria-hidden="true"><svg class="flower"><use href="#flower"/></svg></span>
+      <div class="wrap">
+        <p class="big reveal">{{countdownTitle}}</p>
+        <div class="countdown" id="countdown" aria-live="off"></div>
+        <a class="btn reveal" href="#rsvp">{{countdownButton}}</a>
+      </div>
+    </section>
+
+    <!-- ===== Location ===== -->
+    <section id="location">
+      <div class="location-photo">
+        <div class="wrap">
+          <span class="eyebrow reveal from-left">{{locationEyebrow}}</span>
+          <h2 class="reveal from-left" style="--i:1" data-cfg="venue">{{phVenue}}</h2>
+          <p class="reveal from-left" style="--i:2" data-cfg="address">{{phAddress}}</p>
+          <div class="btn-row reveal from-left" style="--i:3">
+            <a class="btn" id="gmaps" href="#" target="_blank" rel="noopener">Google Maps</a>
+            <a class="btn ghost" id="waze" href="#" target="_blank" rel="noopener">Waze</a>
+          </div>
+        </div>
+      </div>
+      <iframe class="map" id="map" title="{{mapTitle}}" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </section>
+
+    <!-- ===== Flower divider ===== -->
+    <div class="divider" aria-hidden="true">
+      <span class="f-rose reveal pop" style="--i:0"><svg class="flower"><use href="#flower"/></svg></span>
+      <span class="f-copper reveal pop" style="--i:1"><svg class="flower"><use href="#flower"/></svg></span>
+      <span class="f-cowslip reveal pop" style="--i:2"><svg class="flower"><use href="#flower"/></svg></span>
+      <span class="f-willow reveal pop" style="--i:3"><svg class="flower"><use href="#flower"/></svg></span>
+      <span class="f-fox reveal pop" style="--i:4"><svg class="flower"><use href="#flower"/></svg></span>
+      <span class="f-honey reveal pop" style="--i:5"><svg class="flower"><use href="#flower"/></svg></span>
+      <span class="f-rose reveal pop" style="--i:6"><svg class="flower"><use href="#flower"/></svg></span>
+      <span class="f-copper reveal pop" style="--i:7"><svg class="flower"><use href="#flower"/></svg></span>
+    </div>
+
+    <!-- ===== Gifts ===== -->
+    <section id="gifts" class="pad" style="padding-bottom:0">
+      <h2 class="reveal">{{giftsTitle}}</h2>
+      <span class="eyebrow reveal">{{giftsEyebrow}}</span>
+      <div class="gifts" id="gift-grid"></div>
+      <p class="form-msg" id="gift-msg" aria-live="polite"></p>
+    </section>
+
+    <!-- ===== RSVP ===== -->
+    <section id="rsvp" class="band-birch pad">
+      <div class="wrap form-box">
+        <h2 class="reveal">RSVP</h2>
+        <span class="eyebrow reveal">{{rsvpEyebrow}} <span data-cfg="rsvpBy"></span></span>
+        <form class="form reveal" id="rsvp-form" novalidate>
+          <div class="field">
+            <label for="rsvp-name">{{fName}} *</label>
+            <input id="rsvp-name" name="name" required maxlength="80" autocomplete="name">
+          </div>
+          <fieldset class="field">
+            <legend>{{fAttending}} *</legend>
+            <div class="choices">
+              <label><input type="radio" name="attending" value="yes" required><span>{{yes}}</span></label>
+              <label><input type="radio" name="attending" value="no"><span>{{no}}</span></label>
+            </div>
+          </fieldset>
+          <div class="field" id="rsvp-guests-field">
+            <label for="rsvp-guests">{{fGuests}}</label>
+            <select id="rsvp-guests" name="guests">
+              <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="rsvp-note">{{fNote}}</label>
+            <textarea id="rsvp-note" name="note" maxlength="500" placeholder="{{fNotePh}}"></textarea>
+          </div>
+          <button class="btn" type="submit">{{rsvpButton}}</button>
+          <p class="form-msg" aria-live="polite"></p>
+          <p class="form-msg demo-note" hidden></p>
+        </form>
+        <div class="thanks" aria-live="polite">
+          <svg class="flower" aria-hidden="true"><use href="#flower"/></svg>
+          <h2>{{rsvpThanksTitle}}</h2>
+          <p>{{rsvpThanksText}}</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Song requests ===== -->
+    <section id="songs" class="band-willow pad">
+      <div class="wrap form-box">
+        <h2 class="reveal">{{songsTitle}}</h2>
+        <span class="eyebrow reveal">{{songsEyebrow}}</span>
+        <form class="form reveal" id="song-form" novalidate>
+          <div class="row">
+            <div class="field">
+              <label for="song-title">{{fSong}} *</label>
+              <input id="song-title" name="title" required maxlength="100">
+            </div>
+            <div class="field">
+              <label for="song-artist">{{fArtist}} *</label>
+              <input id="song-artist" name="artist" required maxlength="100">
+            </div>
+          </div>
+          <div class="field">
+            <label for="song-name">{{fName}} *</label>
+            <input id="song-name" name="name" required maxlength="80" autocomplete="name">
+          </div>
+          <button class="btn" type="submit">{{songButton}}</button>
+          <p class="form-msg" aria-live="polite"></p>
+        </form>
+        <div class="thanks" aria-live="polite">
+          <svg class="flower" aria-hidden="true"><use href="#flower"/></svg>
+          <p>{{songThanks}}</p>
+        </div>
+        <ul class="song-list" id="song-list" aria-label="{{songListLabel}}"></ul>
+      </div>
+    </section>
+
+    <!-- ===== Note wall ===== -->
+    <section id="wall" class="pad">
+      <div class="wrap">
+        <h2 class="reveal">{{wallTitle}}</h2>
+        <span class="eyebrow reveal">{{wallEyebrow}}</span>
+        <form class="form wall-form reveal" id="wall-form" novalidate>
+          <div class="field">
+            <label for="wall-name">{{fName}} *</label>
+            <input id="wall-name" name="name" required maxlength="80" autocomplete="name">
+          </div>
+          <div class="field">
+            <label for="wall-msg">{{fMessage}} *</label>
+            <textarea id="wall-msg" name="message" required maxlength="400" placeholder="{{fMessagePh}}"></textarea>
+          </div>
+          <button class="btn" type="submit">{{wallButton}}</button>
+          <p class="form-msg" aria-live="polite"></p>
+        </form>
+        <div class="wall" id="wall-notes"></div>
+      </div>
+    </section>
+
+    <!-- ===== About ===== -->
+    <section class="about">
+      <div class="about-img reveal from-left" role="img" aria-label="{{aboutImgLabel}}"></div>
+      <div class="about-text reveal from-right">
+        <h2>{{aboutTitle}}</h2>
+        <p><span class="ph">{{aboutText1}}</span></p>
+        <p><span class="ph">{{aboutText2}}</span></p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <svg class="flower" aria-hidden="true"><use href="#flower"/></svg>
+    <p data-cfg="fullDate">{{phDate}}</p>
+    <p>{{footerLove}}</p>
+    <p><a href="{{altHref}}" hreflang="{{altLang}}">{{altLabel}}</a></p>
+  </footer>
+
+  <script src="{{root}}config.js"></script>
+  <script src="{{root}}main.js"></script>
+</body>
+</html>

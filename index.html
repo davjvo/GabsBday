@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en" data-root="">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gabs' birthday</title>
+  <meta name="description" content="You're invited to celebrate Gabs' birthday.">
+  <meta property="og:title" content="Gabs' birthday">
+  <meta property="og:description" content="You're invited to celebrate Gabs' birthday.">
+  <meta property="og:image" content="assets/img/hero.jpg">
+  <link rel="alternate" hreflang="en" href="">
+  <link rel="alternate" hreflang="es" href="es/">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cg fill='%23D2437A'%3E%3Ccircle cx='50' cy='24' r='19'/%3E%3Ccircle cx='74.7' cy='42' r='19'/%3E%3Ccircle cx='65.3' cy='71' r='19'/%3E%3Ccircle cx='34.7' cy='71' r='19'/%3E%3Ccircle cx='25.3' cy='42' r='19'/%3E%3C/g%3E%3Ccircle cx='50' cy='50' r='14' fill='%23F9F8F4'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500;1,9..144,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- One flower shape, reused everywhere with <use href="#flower"> -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="flower" viewBox="0 0 100 100">
+      <g fill="currentColor">
+        <circle cx="50" cy="24" r="19"/><circle cx="74.7" cy="42" r="19"/><circle cx="65.3" cy="71" r="19"/>
+        <circle cx="34.7" cy="71" r="19"/><circle cx="25.3" cy="42" r="19"/>
+      </g>
+      <circle cx="50" cy="50" r="14" fill="#F9F8F4" opacity=".9"/>
+    </symbol>
+  </svg>
+
+  <!-- ===== Splash: the tap here is what lets the song play ===== -->
+  <div class="splash" id="splash" role="dialog" aria-modal="true" aria-labelledby="splash-title">
+    <a class="lang" href="es/" hreflang="es">Versión en español</a>
+    <div>
+      <svg class="flower" aria-hidden="true"><use href="#flower"/></svg>
+      <h1 id="splash-title">You're invited</h1>
+      <p>Turn your sound on for the full experience.</p>
+      <button class="btn" id="enter" type="button">Open invitation</button>
+      <button class="skip" id="enter-silent" type="button">Enter without music</button>
+    </div>
+  </div>
+
+  <header class="topbar">
+    <a class="brand" href="#top">Gabs</a>
+    <nav aria-label="Sections">
+      <a href="#details">Details</a>
+      <a href="#location">Location</a>
+      <a href="#gifts">Gifts</a>
+      <a href="#rsvp">RSVP</a>
+      <a href="#wall">Notes</a>
+      <a class="lang-switch" href="es/" hreflang="es">ES</a>
+    </nav>
+  </header>
+
+  <button class="music-btn paused" id="music-btn" type="button" aria-label="Play or pause music" aria-pressed="false" hidden>
+    <span class="bars" aria-hidden="true"><i></i><i></i><i></i></span>
+  </button>
+
+  <main id="top">
+    <!-- ===== Portada ===== -->
+    <section class="hero">
+      <div class="hero-bg" aria-hidden="true"></div>
+      <div class="hero-inner">
+        <p class="kicker reveal">Join us to celebrate</p>
+        <h1 class="reveal zoom" style="--i:1">Gabs</h1>
+        <p class="sub reveal" style="--i:2"><span data-cfg="fullDate">Date to be announced</span></p>
+        <a class="btn ghost reveal" style="--i:3" href="#rsvp">RSVP</a>
+      </div>
+      <a class="scroll-cue" href="#details" aria-label="Scroll down">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+      </a>
+    </section>
+
+    <!-- ===== Tagline band ===== -->
+    <section class="band band-honey">
+      <div class="wrap">
+        <p class="big reveal"><span class="ph">A night of flowers, music and the people she loves most</span></p>
+      </div>
+    </section>
+
+    <!-- ===== Details ===== -->
+    <section class="pad" id="details">
+      <div class="wrap">
+        <h2 class="reveal">the details</h2>
+        <span class="eyebrow reveal">save the date</span>
+        <div class="cards">
+          <article class="card reveal" style="--i:0">
+            <div class="card-top"><svg class="flower" aria-hidden="true"><use href="#flower"/></svg></div>
+            <div class="card-body">
+              <h3>Date</h3>
+              <p data-cfg="date">Date to be announced</p>
+              <small data-cfg="weekday"></small>
+            </div>
+          </article>
+          <article class="card reveal" style="--i:1">
+            <div class="card-top"><svg class="flower" aria-hidden="true"><use href="#flower"/></svg></div>
+            <div class="card-body">
+              <h3>Time</h3>
+              <p data-cfg="time">Time TBA</p>
+              <small>until <span data-cfg="timeEnd"></span></small>
+            </div>
+          </article>
+          <article class="card reveal" style="--i:2">
+            <div class="card-top"><svg class="flower" aria-hidden="true"><use href="#flower"/></svg></div>
+            <div class="card-body">
+              <h3>Dress code</h3>
+              <p data-cfg="dress">Dress code TBA</p>
+              <small data-cfg="dressNote"></small>
+            </div>
+          </article>
+        </div>
+        <div class="details-cta reveal">
+          <button class="btn" id="add-cal" type="button">Add to calendar</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Countdown band ===== -->
+    <section class="band band-gorse pad">
+      <span class="float-flower ff-1 reveal pop" aria-hidden="true"><svg class="flower"><use href="#flower"/></svg></span>
+      <span class="float-flower ff-2 reveal pop" style="--i:2" aria-hidden="true"><svg class="flower"><use href="#flower"/></svg></span>
+      <div class="wrap">
+        <p class="big reveal">the countdown is on</p>
+        <div class="countdown" id="countdown" aria-live="off"></div>
+        <a class="btn reveal" href="#rsvp">Confirm attendance</a>
+      </div>
+    </section>
+
+    <!-- ===== Location ===== -->
+    <section id="location">
+      <div class="location-photo">
+        <div class="wrap">
+          <span class="eyebrow reveal from-left">where</span>
+          <h2 class="reveal from-left" style="--i:1" data-cfg="venue">Venue name</h2>
+          <p class="reveal from-left" style="--i:2" data-cfg="address">Address to be announced</p>
+          <div class="btn-row reveal from-left" style="--i:3">
+            <a class="btn" id="gmaps" href="#" target="_blank" rel="noopener">Google Maps</a>
+            <a class="btn ghost" id="waze" href="#" target="_blank" rel="noopener">Waze</a>
+          </div>
+        </div>
+      </div>
+      <iframe class="map" id="map" title="Map to the party" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </section>
+
+    <!-- ===== Flower divider ===== -->
+    <div class="divider" aria-hidden="true">
+      <span class="f-rose reveal pop" style="--i:0"><svg class="flower"><use href="#flower"/></svg></span>
+      <span class="f-copper reveal pop" style="--i:1"><svg class="flower"><use href="#flower"/></svg></span>
+      <span class="f-cowslip reveal pop" style="--i:2"><svg class="flower"><use href="#flower"/></svg></span>
+      <span class="f-willow reveal pop" style="--i:3"><svg class="flower"><use href="#flower"/></svg></span>
+      <span class="f-fox reveal pop" style="--i:4"><svg class="flower"><use href="#flower"/></svg></span>
+      <span class="f-honey reveal pop" style="--i:5"><svg class="flower"><use href="#flower"/></svg></span>
+      <span class="f-rose reveal pop" style="--i:6"><svg class="flower"><use href="#flower"/></svg></span>
+      <span class="f-copper reveal pop" style="--i:7"><svg class="flower"><use href="#flower"/></svg></span>
+    </div>
+
+    <!-- ===== Gifts ===== -->
+    <section id="gifts" class="pad" style="padding-bottom:0">
+      <h2 class="reveal">wish list</h2>
+      <span class="eyebrow reveal">a few ideas, if you'd like</span>
+      <div class="gifts" id="gift-grid"></div>
+      <p class="form-msg" id="gift-msg" aria-live="polite"></p>
+    </section>
+
+    <!-- ===== RSVP ===== -->
+    <section id="rsvp" class="band-birch pad">
+      <div class="wrap form-box">
+        <h2 class="reveal">RSVP</h2>
+        <span class="eyebrow reveal">please reply by <span data-cfg="rsvpBy"></span></span>
+        <form class="form reveal" id="rsvp-form" novalidate>
+          <div class="field">
+            <label for="rsvp-name">Your name *</label>
+            <input id="rsvp-name" name="name" required maxlength="80" autocomplete="name">
+          </div>
+          <fieldset class="field">
+            <legend>Will you come? *</legend>
+            <div class="choices">
+              <label><input type="radio" name="attending" value="yes" required><span>Yes, I'll be there</span></label>
+              <label><input type="radio" name="attending" value="no"><span>Sadly, no</span></label>
+            </div>
+          </fieldset>
+          <div class="field" id="rsvp-guests-field">
+            <label for="rsvp-guests">How many people with you?</label>
+            <select id="rsvp-guests" name="guests">
+              <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="rsvp-note">Anything we should know?</label>
+            <textarea id="rsvp-note" name="note" maxlength="500" placeholder="Allergies, song you love, a hello…"></textarea>
+          </div>
+          <button class="btn" type="submit">Send RSVP</button>
+          <p class="form-msg" aria-live="polite"></p>
+          <p class="form-msg demo-note" hidden></p>
+        </form>
+        <div class="thanks" aria-live="polite">
+          <svg class="flower" aria-hidden="true"><use href="#flower"/></svg>
+          <h2>thank you!</h2>
+          <p>Your answer is saved. See you soon!</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Song requests ===== -->
+    <section id="songs" class="band-willow pad">
+      <div class="wrap form-box">
+        <h2 class="reveal">request a song</h2>
+        <span class="eyebrow reveal">one per guest, so choose wisely</span>
+        <form class="form reveal" id="song-form" novalidate>
+          <div class="row">
+            <div class="field">
+              <label for="song-title">Song *</label>
+              <input id="song-title" name="title" required maxlength="100">
+            </div>
+            <div class="field">
+              <label for="song-artist">Artist *</label>
+              <input id="song-artist" name="artist" required maxlength="100">
+            </div>
+          </div>
+          <div class="field">
+            <label for="song-name">Your name *</label>
+            <input id="song-name" name="name" required maxlength="80" autocomplete="name">
+          </div>
+          <button class="btn" type="submit">Add to playlist</button>
+          <p class="form-msg" aria-live="polite"></p>
+        </form>
+        <div class="thanks" aria-live="polite">
+          <svg class="flower" aria-hidden="true"><use href="#flower"/></svg>
+          <p>Your song is on the list. See you on the dance floor!</p>
+        </div>
+        <ul class="song-list" id="song-list" aria-label="Requested songs"></ul>
+      </div>
+    </section>
+
+    <!-- ===== Note wall ===== -->
+    <section id="wall" class="pad">
+      <div class="wrap">
+        <h2 class="reveal">leave a little note</h2>
+        <span class="eyebrow reveal">for the birthday girl</span>
+        <form class="form wall-form reveal" id="wall-form" novalidate>
+          <div class="field">
+            <label for="wall-name">Your name *</label>
+            <input id="wall-name" name="name" required maxlength="80" autocomplete="name">
+          </div>
+          <div class="field">
+            <label for="wall-msg">Your message *</label>
+            <textarea id="wall-msg" name="message" required maxlength="400" placeholder="Write something sweet…"></textarea>
+          </div>
+          <button class="btn" type="submit">Pin it to the wall</button>
+          <p class="form-msg" aria-live="polite"></p>
+        </form>
+        <div class="wall" id="wall-notes"></div>
+      </div>
+    </section>
+
+    <!-- ===== About ===== -->
+    <section class="about">
+      <div class="about-img reveal from-left" role="img" aria-label="Photo of Gabs"></div>
+      <div class="about-text reveal from-right">
+        <h2>about Gabs</h2>
+        <p><span class="ph">A few lines about Gabs go here: what she loves, what makes her laugh, why this year is worth celebrating.</span></p>
+        <p><span class="ph">A second short paragraph, or a sweet note from Jose.</span></p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <svg class="flower" aria-hidden="true"><use href="#flower"/></svg>
+    <p data-cfg="fullDate">Date to be announced</p>
+    <p>Made with love by Jose</p>
+    <p><a href="es/" hreflang="es">Versión en español</a></p>
+  </footer>
+
+  <script src="config.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>

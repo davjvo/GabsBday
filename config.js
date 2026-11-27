@@ -12,7 +12,7 @@ window.SITE_CONFIG = {
 
   // Dress code: link to the reference look, plus an optional short line
   // under it (leave "" to show only the link).
-  dressCodeUrl: "https://pin.it/1P9e74EO3",
+  dressCodeUrl: "https://www.pinterest.com/gabbyp0521/gabs-28th-bday-bash-the-art-of-getting-old/?invite_code=5bd5f6dcc5c54c289d0d2ab80975c1d4&sender=848013942243695969",
   dressCode: { en: "", es: "" },
 
   // Venue.

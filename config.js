@@ -10,14 +10,14 @@ window.SITE_CONFIG = {
   // Optional end time. Leave "" to hide it (calendar uses 4 hours).
   end: "",
 
-  // Venue. Name and address are PLACEHOLDERS.
-  venueName: "Venue name",
-  address: "Street 123, City",
+  // Venue.
+  venueName: "EcoCafeRD",
+  address: "C. Teodoro Chasseriau 72, Santo Domingo",
   // The Google Maps link to the venue (used by the Google Maps button).
   mapsUrl: "https://maps.app.goo.gl/XCZzVPmzWZvyFz377",
   // Text to search for the embedded map and Waze (venue name + address
   // works best). Leave "" to hide the embedded map and the Waze button.
-  mapQuery: "",
+  mapQuery: "EcoCafeRD, C. Teodoro Chasseriau 72, Santo Domingo",
 
   // RSVP deadline (YYYY-MM-DD). PLACEHOLDER
   rsvpBy: "2027-01-05",

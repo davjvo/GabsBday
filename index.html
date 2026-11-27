@@ -4,9 +4,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Gabs' birthday</title>
-  <meta name="description" content="You're invited to celebrate Gabs' birthday.">
+  <meta name="description" content="Join us for a night under the stars to celebrate Gabs.">
   <meta property="og:title" content="Gabs' birthday">
-  <meta property="og:description" content="You're invited to celebrate Gabs' birthday.">
+  <meta property="og:description" content="Join us for a night under the stars to celebrate Gabs.">
   <meta property="og:image" content="assets/img/hero.jpg">
   <link rel="alternate" hreflang="en" href="">
   <link rel="alternate" hreflang="es" href="es/">
@@ -35,8 +35,8 @@
     <div>
       <svg class="star-icon" aria-hidden="true"><use href="#star"/></svg>
       <h1 id="splash-title">You're invited</h1>
-      <p>Turn your sound on for the full experience.</p>
-      <button class="btn" id="enter" type="button">Open invitation</button>
+      <p>Turn up the volume. This invitation comes with a soundtrack.</p>
+      <button class="btn" id="enter" type="button">Open the invitation</button>
       <button class="skip" id="enter-silent" type="button">Enter without music</button>
     </div>
   </div>
@@ -63,7 +63,7 @@
       <div class="hero-bg" aria-hidden="true"></div>
       <div class="sky" data-stars="70" data-shooting="3" aria-hidden="true"></div>
       <div class="hero-inner">
-        <p class="kicker reveal">Join us to celebrate</p>
+        <p class="kicker reveal">You're invited to celebrate</p>
         <h1 class="reveal zoom" style="--i:1">Gabs</h1>
         <p class="sub reveal" style="--i:2"><span data-cfg="fullDate">Date to be announced</span></p>
         <a class="btn ghost reveal" style="--i:3" href="#rsvp">RSVP</a>
@@ -76,7 +76,7 @@
     <!-- ===== Tagline band ===== -->
     <section class="band band-honey">
       <div class="wrap">
-        <p class="big reveal"><span class="ph">A night of music, stars and the people she loves most</span></p>
+        <p class="big reveal">A night under the stars, with good music, great food and the people she loves most</p>
       </div>
     </section>
 
@@ -104,7 +104,7 @@
           </article>
         </div>
         <div class="details-cta reveal">
-          <button class="btn" id="add-cal" type="button">Add to calendar</button>
+          <button class="btn" id="add-cal" type="button">Add to my calendar</button>
         </div>
       </div>
     </section>
@@ -114,7 +114,7 @@
       <div class="wrap">
         <p class="big reveal">the countdown is on</p>
         <div class="countdown" id="countdown" aria-live="off"></div>
-        <a class="btn reveal" href="#rsvp">Confirm attendance</a>
+        <a class="btn reveal" href="#rsvp">Count me in</a>
       </div>
     </section>
 
@@ -122,7 +122,7 @@
     <section id="location">
       <div class="location-photo">
         <div class="wrap">
-          <span class="eyebrow reveal from-left">where</span>
+          <span class="eyebrow reveal from-left">where we'll be</span>
           <h2 class="reveal from-left" style="--i:1" data-cfg="venue">Venue name</h2>
           <p class="reveal from-left" style="--i:2" data-cfg="address">Address to be announced</p>
           <div class="btn-row reveal from-left" style="--i:3">
@@ -139,9 +139,9 @@
       <div class="wrap gifts-box">
         <svg class="icon gift-icon reveal pop" aria-hidden="true"><use href="#i-gift"/></svg>
         <h2 class="reveal">wish list</h2>
-        <span class="eyebrow reveal">a few ideas, if you'd like</span>
-        <p class="reveal">Your company is the best gift. If you'd still like to bring something, her wish list has a few ideas.</p>
-        <a class="btn reveal" id="wishlist-link" href="#" target="_blank" rel="noopener">Open the wish list <svg class="icon" aria-hidden="true"><use href="#i-external"/></svg></a>
+        <span class="eyebrow reveal">only if you'd like</span>
+        <p class="reveal">Having you there is the best gift of all. But if you'd like to bring a little something, here are a few things she's been dreaming of.</p>
+        <a class="btn reveal" id="wishlist-link" href="#" target="_blank" rel="noopener">See her wish list <svg class="icon" aria-hidden="true"><use href="#i-external"/></svg></a>
       </div>
     </section>
 
@@ -149,38 +149,38 @@
     <section id="rsvp" class="band-birch pad">
       <div class="wrap form-box">
         <h2 class="reveal">RSVP</h2>
-        <span class="eyebrow reveal">please reply by <span data-cfg="rsvpBy"></span></span>
+        <span class="eyebrow reveal">kindly reply by <span data-cfg="rsvpBy"></span></span>
         <form class="form reveal" id="rsvp-form" novalidate>
           <div class="field">
             <label for="rsvp-name">Your name *</label>
             <input id="rsvp-name" name="name" required maxlength="80" autocomplete="name">
           </div>
           <fieldset class="field">
-            <legend>Will you come? *</legend>
+            <legend>Will you join us? *</legend>
             <div class="choices">
-              <label><input type="radio" name="attending" value="yes" required><span>Yes, I'll be there</span></label>
-              <label><input type="radio" name="attending" value="no"><span>Sadly, no</span></label>
+              <label><input type="radio" name="attending" value="yes" required><span>Yes, I'll be there!</span></label>
+              <label><input type="radio" name="attending" value="no"><span>Sadly, I can't make it</span></label>
             </div>
           </fieldset>
           <div class="field" id="rsvp-guests-field">
-            <label for="rsvp-guests">How many people with you?</label>
+            <label for="rsvp-guests">How many people are coming with you?</label>
             <select id="rsvp-guests" name="guests">
               <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
             </select>
           </div>
           <div class="field">
             <label for="rsvp-note">Anything we should know?</label>
-            <textarea id="rsvp-note" name="note" maxlength="500" placeholder="Allergies, song you love, a hello…"></textarea>
+            <textarea id="rsvp-note" name="note" maxlength="500" placeholder="Allergies, a favorite song, or just a hello…"></textarea>
           </div>
           <div class="captcha"></div>
-          <button class="btn" type="submit">Send RSVP</button>
+          <button class="btn" type="submit">Send my RSVP</button>
           <p class="form-msg" aria-live="polite"></p>
           <p class="form-msg demo-note" hidden></p>
         </form>
         <div class="thanks" aria-live="polite">
           <svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>
           <h2>thank you!</h2>
-          <p>Your answer is saved. See you soon!</p>
+          <p>We got your answer. We can't wait to see you!</p>
         </div>
       </div>
     </section>
@@ -189,7 +189,7 @@
     <section id="songs" class="band-willow pad">
       <div class="wrap form-box">
         <h2 class="reveal">request a song</h2>
-        <span class="eyebrow reveal">one per guest, so choose wisely</span>
+        <span class="eyebrow reveal">one per guest, so make it count</span>
         <form class="form reveal" id="song-form" novalidate>
           <div class="row">
             <div class="field">
@@ -206,12 +206,12 @@
             <input id="song-name" name="name" required maxlength="80" autocomplete="name">
           </div>
           <div class="captcha"></div>
-          <button class="btn" type="submit">Add to playlist</button>
+          <button class="btn" type="submit">Add to the playlist</button>
           <p class="form-msg" aria-live="polite"></p>
         </form>
         <div class="thanks" aria-live="polite">
           <svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>
-          <p>Your song is on the list. See you on the dance floor!</p>
+          <p>Your song made the playlist. See you on the dance floor!</p>
         </div>
         <ul class="song-list" id="song-list" aria-label="Requested songs"></ul>
       </div>
@@ -220,7 +220,7 @@
     <!-- ===== Note wall ===== -->
     <section id="wall" class="pad">
       <div class="wrap">
-        <h2 class="reveal">leave a little note</h2>
+        <h2 class="reveal">leave her a note</h2>
         <span class="eyebrow reveal">for the birthday girl</span>
         <form class="form wall-form reveal" id="wall-form" novalidate>
           <div class="field">

@@ -4,9 +4,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Cumpleaños de Gabs</title>
-  <meta name="description" content="Estás invitado a celebrar el cumpleaños de Gabs.">
+  <meta name="description" content="Acompáñanos a celebrar el cumpleaños de Gabs bajo las estrellas.">
   <meta property="og:title" content="Cumpleaños de Gabs">
-  <meta property="og:description" content="Estás invitado a celebrar el cumpleaños de Gabs.">
+  <meta property="og:description" content="Acompáñanos a celebrar el cumpleaños de Gabs bajo las estrellas.">
   <meta property="og:image" content="../assets/img/hero.jpg">
   <link rel="alternate" hreflang="en" href="../">
   <link rel="alternate" hreflang="es" href="../es/">
@@ -34,9 +34,9 @@
     <a class="lang" href="../" hreflang="en">English version</a>
     <div>
       <svg class="star-icon" aria-hidden="true"><use href="#star"/></svg>
-      <h1 id="splash-title">Estás invitado</h1>
-      <p>Sube el volumen para vivirlo completo.</p>
-      <button class="btn" id="enter" type="button">Abrir invitación</button>
+      <h1 id="splash-title">Tienes una invitación</h1>
+      <p>Sube el volumen: esta invitación viene con banda sonora.</p>
+      <button class="btn" id="enter" type="button">Abrir la invitación</button>
       <button class="skip" id="enter-silent" type="button">Entrar sin música</button>
     </div>
   </div>
@@ -63,7 +63,7 @@
       <div class="hero-bg" aria-hidden="true"></div>
       <div class="sky" data-stars="70" data-shooting="3" aria-hidden="true"></div>
       <div class="hero-inner">
-        <p class="kicker reveal">Acompáñanos a celebrar</p>
+        <p class="kicker reveal">Te invitamos a celebrar</p>
         <h1 class="reveal zoom" style="--i:1">Gabs</h1>
         <p class="sub reveal" style="--i:2"><span data-cfg="fullDate">Fecha por anunciar</span></p>
         <a class="btn ghost reveal" style="--i:3" href="#rsvp">Confirmar</a>
@@ -76,7 +76,7 @@
     <!-- ===== Tagline band ===== -->
     <section class="band band-honey">
       <div class="wrap">
-        <p class="big reveal"><span class="ph">Una noche de música, estrellas y la gente que más quiere</span></p>
+        <p class="big reveal">Una noche bajo las estrellas, con buena música, buena comida y la gente que más quiere</p>
       </div>
     </section>
 
@@ -84,7 +84,7 @@
     <section class="pad" id="details">
       <div class="wrap">
         <h2 class="reveal">los detalles</h2>
-        <span class="eyebrow reveal">aparta la fecha</span>
+        <span class="eyebrow reveal">separa la fecha</span>
         <div class="cards">
           <article class="card reveal" style="--i:0">
             <div class="card-top"><svg class="icon" aria-hidden="true"><use href="#i-calendar"/></svg></div>
@@ -104,7 +104,7 @@
           </article>
         </div>
         <div class="details-cta reveal">
-          <button class="btn" id="add-cal" type="button">Añadir al calendario</button>
+          <button class="btn" id="add-cal" type="button">Agregar a mi calendario</button>
         </div>
       </div>
     </section>
@@ -114,7 +114,7 @@
       <div class="wrap">
         <p class="big reveal">ya empezó la cuenta regresiva</p>
         <div class="countdown" id="countdown" aria-live="off"></div>
-        <a class="btn reveal" href="#rsvp">Confirmar asistencia</a>
+        <a class="btn reveal" href="#rsvp">¡Cuenta conmigo!</a>
       </div>
     </section>
 
@@ -122,7 +122,7 @@
     <section id="location">
       <div class="location-photo">
         <div class="wrap">
-          <span class="eyebrow reveal from-left">dónde</span>
+          <span class="eyebrow reveal from-left">dónde nos vemos</span>
           <h2 class="reveal from-left" style="--i:1" data-cfg="venue">Nombre del lugar</h2>
           <p class="reveal from-left" style="--i:2" data-cfg="address">Dirección por anunciar</p>
           <div class="btn-row reveal from-left" style="--i:3">
@@ -138,10 +138,10 @@
     <section id="gifts" class="pad">
       <div class="wrap gifts-box">
         <svg class="icon gift-icon reveal pop" aria-hidden="true"><use href="#i-gift"/></svg>
-        <h2 class="reveal">lista de regalos</h2>
-        <span class="eyebrow reveal">algunas ideas, si quieres</span>
-        <p class="reveal">Tu compañía es el mejor regalo. Si aun así quieres traer algo, en su lista hay algunas ideas.</p>
-        <a class="btn reveal" id="wishlist-link" href="#" target="_blank" rel="noopener">Ver la lista de regalos <svg class="icon" aria-hidden="true"><use href="#i-external"/></svg></a>
+        <h2 class="reveal">lista de deseos</h2>
+        <span class="eyebrow reveal">solo si quieres</span>
+        <p class="reveal">Tu presencia es el mejor regalo. Pero si quieres traerle un detallito, aquí tienes algunas cosas con las que sueña.</p>
+        <a class="btn reveal" id="wishlist-link" href="#" target="_blank" rel="noopener">Ver su lista de deseos <svg class="icon" aria-hidden="true"><use href="#i-external"/></svg></a>
       </div>
     </section>
 
@@ -156,31 +156,31 @@
             <input id="rsvp-name" name="name" required maxlength="80" autocomplete="name">
           </div>
           <fieldset class="field">
-            <legend>¿Vienes? *</legend>
+            <legend>¿Nos acompañas? *</legend>
             <div class="choices">
               <label><input type="radio" name="attending" value="yes" required><span>¡Sí, ahí estaré!</span></label>
-              <label><input type="radio" name="attending" value="no"><span>No podré</span></label>
+              <label><input type="radio" name="attending" value="no"><span>Esta vez no podré</span></label>
             </div>
           </fieldset>
           <div class="field" id="rsvp-guests-field">
-            <label for="rsvp-guests">¿Cuántas personas te acompañan?</label>
+            <label for="rsvp-guests">¿Cuántas personas vienen contigo?</label>
             <select id="rsvp-guests" name="guests">
               <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
             </select>
           </div>
           <div class="field">
             <label for="rsvp-note">¿Algo que debamos saber?</label>
-            <textarea id="rsvp-note" name="note" maxlength="500" placeholder="Alergias, una canción que te encanta, un saludo…"></textarea>
+            <textarea id="rsvp-note" name="note" maxlength="500" placeholder="Alergias, tu canción favorita o simplemente un saludo…"></textarea>
           </div>
           <div class="captcha"></div>
-          <button class="btn" type="submit">Enviar respuesta</button>
+          <button class="btn" type="submit">Enviar mi respuesta</button>
           <p class="form-msg" aria-live="polite"></p>
           <p class="form-msg demo-note" hidden></p>
         </form>
         <div class="thanks" aria-live="polite">
           <svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>
           <h2>¡gracias!</h2>
-          <p>Tu respuesta quedó guardada. ¡Nos vemos pronto!</p>
+          <p>Recibimos tu respuesta. ¡Te esperamos!</p>
         </div>
       </div>
     </section>
@@ -189,7 +189,7 @@
     <section id="songs" class="band-willow pad">
       <div class="wrap form-box">
         <h2 class="reveal">pide tu canción</h2>
-        <span class="eyebrow reveal">solo una por persona, elige bien</span>
+        <span class="eyebrow reveal">solo una por persona, así que elige bien</span>
         <form class="form reveal" id="song-form" novalidate>
           <div class="row">
             <div class="field">
@@ -211,7 +211,7 @@
         </form>
         <div class="thanks" aria-live="polite">
           <svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>
-          <p>Tu canción ya está en la lista. ¡Nos vemos en la pista!</p>
+          <p>Tu canción ya está en la playlist. ¡Nos vemos en la pista!</p>
         </div>
         <ul class="song-list" id="song-list" aria-label="Canciones pedidas"></ul>
       </div>
@@ -232,7 +232,7 @@
             <textarea id="wall-msg" name="message" required maxlength="400" placeholder="Escribe algo bonito…"></textarea>
           </div>
           <div class="captcha"></div>
-          <button class="btn" type="submit">Pegar en el muro</button>
+          <button class="btn" type="submit">Pegarlo en el muro</button>
           <p class="form-msg" aria-live="polite"></p>
         </form>
         <div class="wall" id="wall-notes"></div>

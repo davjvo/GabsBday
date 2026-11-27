@@ -10,6 +10,11 @@ window.SITE_CONFIG = {
   // Optional end time. Leave "" to hide it (calendar uses 4 hours).
   end: "",
 
+  // Dress code: link to the reference look, plus an optional short line
+  // under it (leave "" to show only the link).
+  dressCodeUrl: "https://pin.it/1P9e74EO3",
+  dressCode: { en: "", es: "" },
+
   // Venue.
   venueName: "EcoCafeRD",
   address: "C. Teodoro Chasseriau 72, Santo Domingo",

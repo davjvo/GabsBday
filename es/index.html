@@ -21,6 +21,7 @@
   <svg width="0" height="0" style="position:absolute" aria-hidden="true">
     <symbol id="star" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z"/></symbol>
     <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4"/></symbol>
+    <symbol id="i-dress" viewBox="0 0 24 24"><path d="M9 3h6l-1 4 5 13H5l5-13z"/><path d="M10 7h4"/></symbol>
     <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></symbol>
     <symbol id="i-gift" viewBox="0 0 24 24"><rect x="3.5" y="9" width="17" height="11" rx="1.5"/><path d="M2.5 9h19M12 9v11M12 9c-1.5-4-6-4-6-1.5S10 9 12 9zm0 0c1.5-4 6-4 6-1.5S14 9 12 9z"/></symbol>
     <symbol id="i-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.7 2.7L16 9.8"/></symbol>
@@ -94,6 +95,14 @@
               <h3>Llegada</h3>
               <p data-cfg="time">Hora por anunciar</p>
               <small class="until">hasta las <span data-cfg="timeEnd"></span></small>
+            </div>
+          </article>
+          <article class="card reveal" style="--i:2">
+            <div class="card-top"><svg class="icon" aria-hidden="true"><use href="#i-dress"/></svg></div>
+            <div class="card-body">
+              <h3>Código de vestimenta</h3>
+              <p><a class="dress-link" id="dress-link" href="#" target="_blank" rel="noopener">Ver la inspiración <svg class="icon" aria-hidden="true"><use href="#i-external"/></svg></a></p>
+              <small data-cfg="dress"></small>
             </div>
           </article>
         </div>

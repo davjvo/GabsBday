@@ -209,6 +209,7 @@
     weekday: cap(fmt(start, { weekday: "long" })) + " · " + fmt(start, { year: "numeric" }),
     time: fmt(start, { hour: "numeric", minute: "2-digit" }),
     timeEnd: CFG.end ? fmt(end, { hour: "numeric", minute: "2-digit" }) : "",
+    dress: (CFG.dressCode || {})[LANG] || "",
     venue: CFG.venueName || "",
     address: CFG.address || "",
     rsvpBy: cap(fmt(new Date(CFG.rsvpBy + "T12:00"), { day: "numeric", month: "long" })),
@@ -305,6 +306,9 @@
   /* ==========================================================
      Wish list: one button to the external list (config.js)
      ========================================================== */
+  const dressLink = $("#dress-link");
+  if (dressLink && CFG.dressCodeUrl) dressLink.href = CFG.dressCodeUrl;
+
   const wishlist = $("#wishlist-link");
   if (wishlist) {
     if (CFG.wishlistUrl && CFG.wishlistUrl !== "#") wishlist.href = CFG.wishlistUrl;

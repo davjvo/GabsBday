@@ -11,6 +11,10 @@
 // true = new notes stay hidden until you type TRUE in the "approved" column.
 var MODERATE_NOTES = false;
 
+// reCAPTCHA: put your SECRET key in Project Settings > Script Properties
+// as RECAPTCHA_SECRET (never in this file or on the site). When it is set,
+// every form submission must pass the "I'm not a robot" check.
+
 var SHEETS = {
   rsvp:  ["time", "name", "attending", "guests", "note", "lang", "guest"],
   note:  ["time", "name", "message", "approved", "lang"],
@@ -43,6 +47,7 @@ function doPost(e) {
   try { data = JSON.parse(e.postData.contents); } catch (err) { return json({ ok: false, error: "bad_json" }); }
   var kind = String(data.kind || "");
   if (!SHEETS[kind]) return json({ ok: false, error: "bad_kind" });
+  if (!captchaOk(data.captcha)) return json({ ok: false, error: "captcha" });
 
   var lock = LockService.getScriptLock();
   lock.waitLock(10000);
@@ -91,6 +96,19 @@ function doPost(e) {
 }
 
 /* ---------- helpers ---------- */
+function captchaOk(token) {
+  var secret = PropertiesService.getScriptProperties().getProperty("RECAPTCHA_SECRET");
+  if (!secret) return true; // captcha not set up yet
+  if (!token) return false;
+  try {
+    var res = UrlFetchApp.fetch("https://www.google.com/recaptcha/api/siteverify", {
+      method: "post", payload: { secret: secret, response: String(token) }, muteHttpExceptions: true
+    });
+    return JSON.parse(res.getContentText()).success === true;
+  } catch (err) {
+    return false;
+  }
+}
 function sheet(kind) {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var sh = ss.getSheetByName(TAB_NAMES[kind]);

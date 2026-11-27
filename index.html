@@ -4,13 +4,13 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Gabs' birthday</title>
-  <meta name="description" content="You're invited to celebrate Gabs' birthday.">
+  <meta name="description" content="Join us for a night under the stars to celebrate Gabs.">
   <meta property="og:title" content="Gabs' birthday">
-  <meta property="og:description" content="You're invited to celebrate Gabs' birthday.">
+  <meta property="og:description" content="Join us for a night under the stars to celebrate Gabs.">
   <meta property="og:image" content="assets/img/hero.jpg">
   <link rel="alternate" hreflang="en" href="">
   <link rel="alternate" hreflang="es" href="es/">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cg fill='%23D2437A'%3E%3Ccircle cx='50' cy='24' r='19'/%3E%3Ccircle cx='74.7' cy='42' r='19'/%3E%3Ccircle cx='65.3' cy='71' r='19'/%3E%3Ccircle cx='34.7' cy='71' r='19'/%3E%3Ccircle cx='25.3' cy='42' r='19'/%3E%3C/g%3E%3Ccircle cx='50' cy='50' r='14' fill='%23F9F8F4'/%3E%3C/svg%3E">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='12' fill='%23224653'/%3E%3Cpath fill='%23E4C259' d='M12 4.5l2.2 4.6 5 .6-3.7 3.5 1 5L12 15.7l-4.5 2.5 1-5-3.7-3.5 5-.6z'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500;1,9..144,600&display=swap" rel="stylesheet">
@@ -19,16 +19,9 @@
 <body>
   <!-- Shared icons, reused with <use href="#name"> -->
   <svg width="0" height="0" style="position:absolute" aria-hidden="true">
-    <symbol id="flower" viewBox="0 0 100 100">
-      <g fill="currentColor">
-        <circle cx="50" cy="24" r="19"/><circle cx="74.7" cy="42" r="19"/><circle cx="65.3" cy="71" r="19"/>
-        <circle cx="34.7" cy="71" r="19"/><circle cx="25.3" cy="42" r="19"/>
-      </g>
-      <circle cx="50" cy="50" r="14" fill="#F9F8F4" opacity=".9"/>
-    </symbol>
+    <symbol id="star" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z"/></symbol>
     <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4"/></symbol>
     <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></symbol>
-    <symbol id="i-dress" viewBox="0 0 24 24"><path d="M9 3h6l-1 4 5 13H5l5-13z"/><path d="M10 7h4"/></symbol>
     <symbol id="i-gift" viewBox="0 0 24 24"><rect x="3.5" y="9" width="17" height="11" rx="1.5"/><path d="M2.5 9h19M12 9v11M12 9c-1.5-4-6-4-6-1.5S10 9 12 9zm0 0c1.5-4 6-4 6-1.5S14 9 12 9z"/></symbol>
     <symbol id="i-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.7 2.7L16 9.8"/></symbol>
     <symbol id="i-note" viewBox="0 0 24 24"><path d="M9 18V5l11-2v13"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="17.5" cy="16" r="2.5"/></symbol>
@@ -37,12 +30,13 @@
 
   <!-- ===== Splash: the tap here is what lets the song play ===== -->
   <div class="splash" id="splash" role="dialog" aria-modal="true" aria-labelledby="splash-title">
+    <div class="sky" data-stars="90" data-shooting="4" aria-hidden="true"></div>
     <a class="lang" href="es/" hreflang="es">Versión en español</a>
     <div>
-      <svg class="flower" aria-hidden="true"><use href="#flower"/></svg>
+      <svg class="star-icon" aria-hidden="true"><use href="#star"/></svg>
       <h1 id="splash-title">You're invited</h1>
-      <p>Turn your sound on for the full experience.</p>
-      <button class="btn" id="enter" type="button">Open invitation</button>
+      <p>Turn up the volume. This invitation comes with a soundtrack.</p>
+      <button class="btn" id="enter" type="button">Open the invitation</button>
       <button class="skip" id="enter-silent" type="button">Enter without music</button>
     </div>
   </div>
@@ -67,8 +61,9 @@
     <!-- ===== Portada ===== -->
     <section class="hero">
       <div class="hero-bg" aria-hidden="true"></div>
+      <div class="sky" data-stars="70" data-shooting="3" aria-hidden="true"></div>
       <div class="hero-inner">
-        <p class="kicker reveal">Join us to celebrate</p>
+        <p class="kicker reveal">You're invited to celebrate</p>
         <h1 class="reveal zoom" style="--i:1">Gabs</h1>
         <p class="sub reveal" style="--i:2"><span data-cfg="fullDate">Date to be announced</span></p>
         <a class="btn ghost reveal" style="--i:3" href="#rsvp">RSVP</a>
@@ -81,7 +76,7 @@
     <!-- ===== Tagline band ===== -->
     <section class="band band-honey">
       <div class="wrap">
-        <p class="big reveal"><span class="ph">A night of flowers, music and the people she loves most</span></p>
+        <p class="big reveal">A night under the stars, with good music, great food and the people she loves most</p>
       </div>
     </section>
 
@@ -102,22 +97,14 @@
           <article class="card reveal" style="--i:1">
             <div class="card-top"><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg></div>
             <div class="card-body">
-              <h3>Time</h3>
+              <h3>Arrival</h3>
               <p data-cfg="time">Time TBA</p>
-              <small>until <span data-cfg="timeEnd"></span></small>
-            </div>
-          </article>
-          <article class="card reveal" style="--i:2">
-            <div class="card-top"><svg class="icon" aria-hidden="true"><use href="#i-dress"/></svg></div>
-            <div class="card-body">
-              <h3>Dress code</h3>
-              <p data-cfg="dress">Dress code TBA</p>
-              <small data-cfg="dressNote"></small>
+              <small class="until">until <span data-cfg="timeEnd"></span></small>
             </div>
           </article>
         </div>
         <div class="details-cta reveal">
-          <button class="btn" id="add-cal" type="button">Add to calendar</button>
+          <button class="btn" id="add-cal" type="button">Add to my calendar</button>
         </div>
       </div>
     </section>
@@ -127,7 +114,7 @@
       <div class="wrap">
         <p class="big reveal">the countdown is on</p>
         <div class="countdown" id="countdown" aria-live="off"></div>
-        <a class="btn reveal" href="#rsvp">Confirm attendance</a>
+        <a class="btn reveal" href="#rsvp">Count me in</a>
       </div>
     </section>
 
@@ -135,7 +122,7 @@
     <section id="location">
       <div class="location-photo">
         <div class="wrap">
-          <span class="eyebrow reveal from-left">where</span>
+          <span class="eyebrow reveal from-left">where we'll be</span>
           <h2 class="reveal from-left" style="--i:1" data-cfg="venue">Venue name</h2>
           <p class="reveal from-left" style="--i:2" data-cfg="address">Address to be announced</p>
           <div class="btn-row reveal from-left" style="--i:3">
@@ -152,9 +139,9 @@
       <div class="wrap gifts-box">
         <svg class="icon gift-icon reveal pop" aria-hidden="true"><use href="#i-gift"/></svg>
         <h2 class="reveal">wish list</h2>
-        <span class="eyebrow reveal">a few ideas, if you'd like</span>
-        <p class="reveal">Your company is the best gift. If you'd still like to bring something, her wish list has a few ideas.</p>
-        <a class="btn reveal" id="wishlist-link" href="#" target="_blank" rel="noopener">Open the wish list <svg class="icon" aria-hidden="true"><use href="#i-external"/></svg></a>
+        <span class="eyebrow reveal">only if you'd like</span>
+        <p class="reveal">Having you there is the best gift of all. But if you'd like to bring a little something, here are a few things she's been dreaming of.</p>
+        <a class="btn reveal" id="wishlist-link" href="#" target="_blank" rel="noopener">See her wish list <svg class="icon" aria-hidden="true"><use href="#i-external"/></svg></a>
       </div>
     </section>
 
@@ -162,37 +149,38 @@
     <section id="rsvp" class="band-birch pad">
       <div class="wrap form-box">
         <h2 class="reveal">RSVP</h2>
-        <span class="eyebrow reveal">please reply by <span data-cfg="rsvpBy"></span></span>
+        <span class="eyebrow reveal">kindly reply by <span data-cfg="rsvpBy"></span></span>
         <form class="form reveal" id="rsvp-form" novalidate>
           <div class="field">
             <label for="rsvp-name">Your name *</label>
             <input id="rsvp-name" name="name" required maxlength="80" autocomplete="name">
           </div>
           <fieldset class="field">
-            <legend>Will you come? *</legend>
+            <legend>Will you join us? *</legend>
             <div class="choices">
-              <label><input type="radio" name="attending" value="yes" required><span>Yes, I'll be there</span></label>
-              <label><input type="radio" name="attending" value="no"><span>Sadly, no</span></label>
+              <label><input type="radio" name="attending" value="yes" required><span>Yes, I'll be there!</span></label>
+              <label><input type="radio" name="attending" value="no"><span>Sadly, I can't make it</span></label>
             </div>
           </fieldset>
           <div class="field" id="rsvp-guests-field">
-            <label for="rsvp-guests">How many people with you?</label>
+            <label for="rsvp-guests">How many people are coming with you?</label>
             <select id="rsvp-guests" name="guests">
               <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
             </select>
           </div>
           <div class="field">
             <label for="rsvp-note">Anything we should know?</label>
-            <textarea id="rsvp-note" name="note" maxlength="500" placeholder="Allergies, song you love, a hello…"></textarea>
+            <textarea id="rsvp-note" name="note" maxlength="500" placeholder="Allergies, a favorite song, or just a hello…"></textarea>
           </div>
-          <button class="btn" type="submit">Send RSVP</button>
+          <div class="captcha"></div>
+          <button class="btn" type="submit">Send my RSVP</button>
           <p class="form-msg" aria-live="polite"></p>
           <p class="form-msg demo-note" hidden></p>
         </form>
         <div class="thanks" aria-live="polite">
           <svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>
           <h2>thank you!</h2>
-          <p>Your answer is saved. See you soon!</p>
+          <p>We got your answer. We can't wait to see you!</p>
         </div>
       </div>
     </section>
@@ -201,7 +189,7 @@
     <section id="songs" class="band-willow pad">
       <div class="wrap form-box">
         <h2 class="reveal">request a song</h2>
-        <span class="eyebrow reveal">one per guest, so choose wisely</span>
+        <span class="eyebrow reveal">one per guest, so make it count</span>
         <form class="form reveal" id="song-form" novalidate>
           <div class="row">
             <div class="field">
@@ -217,12 +205,13 @@
             <label for="song-name">Your name *</label>
             <input id="song-name" name="name" required maxlength="80" autocomplete="name">
           </div>
-          <button class="btn" type="submit">Add to playlist</button>
+          <div class="captcha"></div>
+          <button class="btn" type="submit">Add to the playlist</button>
           <p class="form-msg" aria-live="polite"></p>
         </form>
         <div class="thanks" aria-live="polite">
           <svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>
-          <p>Your song is on the list. See you on the dance floor!</p>
+          <p>Your song made the playlist. See you on the dance floor!</p>
         </div>
         <ul class="song-list" id="song-list" aria-label="Requested songs"></ul>
       </div>
@@ -231,7 +220,7 @@
     <!-- ===== Note wall ===== -->
     <section id="wall" class="pad">
       <div class="wrap">
-        <h2 class="reveal">leave a little note</h2>
+        <h2 class="reveal">leave her a note</h2>
         <span class="eyebrow reveal">for the birthday girl</span>
         <form class="form wall-form reveal" id="wall-form" novalidate>
           <div class="field">
@@ -242,20 +231,11 @@
             <label for="wall-msg">Your message *</label>
             <textarea id="wall-msg" name="message" required maxlength="400" placeholder="Write something sweet…"></textarea>
           </div>
+          <div class="captcha"></div>
           <button class="btn" type="submit">Pin it to the wall</button>
           <p class="form-msg" aria-live="polite"></p>
         </form>
         <div class="wall" id="wall-notes"></div>
-      </div>
-    </section>
-
-    <!-- ===== About ===== -->
-    <section class="about">
-      <div class="about-img reveal from-left" role="img" aria-label="Photo of Gabs"></div>
-      <div class="about-text reveal from-right">
-        <h2>about Gabs</h2>
-        <p><span class="ph">A few lines about Gabs go here: what she loves, what makes her laugh, why this year is worth celebrating.</span></p>
-        <p><span class="ph">A second short paragraph, or a sweet note from Jose.</span></p>
       </div>
     </section>
   </main>

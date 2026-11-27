@@ -10,7 +10,7 @@
   <meta property="og:image" content="{{root}}assets/img/hero.jpg">
   <link rel="alternate" hreflang="en" href="{{root}}">
   <link rel="alternate" hreflang="es" href="{{root}}es/">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cg fill='%23D2437A'%3E%3Ccircle cx='50' cy='24' r='19'/%3E%3Ccircle cx='74.7' cy='42' r='19'/%3E%3Ccircle cx='65.3' cy='71' r='19'/%3E%3Ccircle cx='34.7' cy='71' r='19'/%3E%3Ccircle cx='25.3' cy='42' r='19'/%3E%3C/g%3E%3Ccircle cx='50' cy='50' r='14' fill='%23F9F8F4'/%3E%3C/svg%3E">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='12' fill='%23224653'/%3E%3Cpath fill='%23E4C259' d='M12 4.5l2.2 4.6 5 .6-3.7 3.5 1 5L12 15.7l-4.5 2.5 1-5-3.7-3.5 5-.6z'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500;1,9..144,600&display=swap" rel="stylesheet">
@@ -19,16 +19,9 @@
 <body>
   <!-- Shared icons, reused with <use href="#name"> -->
   <svg width="0" height="0" style="position:absolute" aria-hidden="true">
-    <symbol id="flower" viewBox="0 0 100 100">
-      <g fill="currentColor">
-        <circle cx="50" cy="24" r="19"/><circle cx="74.7" cy="42" r="19"/><circle cx="65.3" cy="71" r="19"/>
-        <circle cx="34.7" cy="71" r="19"/><circle cx="25.3" cy="42" r="19"/>
-      </g>
-      <circle cx="50" cy="50" r="14" fill="#F9F8F4" opacity=".9"/>
-    </symbol>
+    <symbol id="star" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z"/></symbol>
     <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4"/></symbol>
     <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></symbol>
-    <symbol id="i-dress" viewBox="0 0 24 24"><path d="M9 3h6l-1 4 5 13H5l5-13z"/><path d="M10 7h4"/></symbol>
     <symbol id="i-gift" viewBox="0 0 24 24"><rect x="3.5" y="9" width="17" height="11" rx="1.5"/><path d="M2.5 9h19M12 9v11M12 9c-1.5-4-6-4-6-1.5S10 9 12 9zm0 0c1.5-4 6-4 6-1.5S14 9 12 9z"/></symbol>
     <symbol id="i-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.7 2.7L16 9.8"/></symbol>
     <symbol id="i-note" viewBox="0 0 24 24"><path d="M9 18V5l11-2v13"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="17.5" cy="16" r="2.5"/></symbol>
@@ -37,9 +30,10 @@
 
   <!-- ===== Splash: the tap here is what lets the song play ===== -->
   <div class="splash" id="splash" role="dialog" aria-modal="true" aria-labelledby="splash-title">
+    <div class="sky" data-stars="90" data-shooting="4" aria-hidden="true"></div>
     <a class="lang" href="{{altHref}}" hreflang="{{altLang}}">{{altLabel}}</a>
     <div>
-      <svg class="flower" aria-hidden="true"><use href="#flower"/></svg>
+      <svg class="star-icon" aria-hidden="true"><use href="#star"/></svg>
       <h1 id="splash-title">{{splashTitle}}</h1>
       <p>{{splashText}}</p>
       <button class="btn" id="enter" type="button">{{splashButton}}</button>
@@ -67,6 +61,7 @@
     <!-- ===== Portada ===== -->
     <section class="hero">
       <div class="hero-bg" aria-hidden="true"></div>
+      <div class="sky" data-stars="70" data-shooting="3" aria-hidden="true"></div>
       <div class="hero-inner">
         <p class="kicker reveal">{{heroKicker}}</p>
         <h1 class="reveal zoom" style="--i:1">Gabs</h1>
@@ -81,7 +76,7 @@
     <!-- ===== Tagline band ===== -->
     <section class="band band-honey">
       <div class="wrap">
-        <p class="big reveal"><span class="ph">{{tagline}}</span></p>
+        <p class="big reveal">{{tagline}}</p>
       </div>
     </section>
 
@@ -104,15 +99,7 @@
             <div class="card-body">
               <h3>{{cardTime}}</h3>
               <p data-cfg="time">{{phTime}}</p>
-              <small>{{untilWord}} <span data-cfg="timeEnd"></span></small>
-            </div>
-          </article>
-          <article class="card reveal" style="--i:2">
-            <div class="card-top"><svg class="icon" aria-hidden="true"><use href="#i-dress"/></svg></div>
-            <div class="card-body">
-              <h3>{{cardDress}}</h3>
-              <p data-cfg="dress">{{phDress}}</p>
-              <small data-cfg="dressNote"></small>
+              <small class="until">{{untilWord}} <span data-cfg="timeEnd"></span></small>
             </div>
           </article>
         </div>
@@ -185,6 +172,7 @@
             <label for="rsvp-note">{{fNote}}</label>
             <textarea id="rsvp-note" name="note" maxlength="500" placeholder="{{fNotePh}}"></textarea>
           </div>
+          <div class="captcha"></div>
           <button class="btn" type="submit">{{rsvpButton}}</button>
           <p class="form-msg" aria-live="polite"></p>
           <p class="form-msg demo-note" hidden></p>
@@ -217,6 +205,7 @@
             <label for="song-name">{{fName}} *</label>
             <input id="song-name" name="name" required maxlength="80" autocomplete="name">
           </div>
+          <div class="captcha"></div>
           <button class="btn" type="submit">{{songButton}}</button>
           <p class="form-msg" aria-live="polite"></p>
         </form>
@@ -242,20 +231,11 @@
             <label for="wall-msg">{{fMessage}} *</label>
             <textarea id="wall-msg" name="message" required maxlength="400" placeholder="{{fMessagePh}}"></textarea>
           </div>
+          <div class="captcha"></div>
           <button class="btn" type="submit">{{wallButton}}</button>
           <p class="form-msg" aria-live="polite"></p>
         </form>
         <div class="wall" id="wall-notes"></div>
-      </div>
-    </section>
-
-    <!-- ===== About ===== -->
-    <section class="about">
-      <div class="about-img reveal from-left" role="img" aria-label="{{aboutImgLabel}}"></div>
-      <div class="about-text reveal from-right">
-        <h2>{{aboutTitle}}</h2>
-        <p><span class="ph">{{aboutText1}}</span></p>
-        <p><span class="ph">{{aboutText2}}</span></p>
       </div>
     </section>
   </main>

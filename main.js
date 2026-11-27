@@ -17,34 +17,34 @@
       days: "days", hours: "hours", mins: "minutes", secs: "seconds",
       today: "It's party day!",
       sending: "Sending…",
-      rsvpOk: "Thank you! Your answer is saved.",
+      rsvpOk: "Thank you! We got your answer.",
       songOk: "Added to the playlist!",
-      songDup: "You already requested a song. One per guest!",
+      songDup: "You've already requested a song. Just one per guest!",
       noteOk: "Your note is on the wall. Thank you!",
       notePending: "Thank you! Your note will appear once it's approved.",
       err: "Something went wrong. Please try again in a moment.",
       required: "Please fill in the required fields.",
-      noSongs: "No requests yet. Be the first!",
-      noNotes: "No notes yet. Leave the first one!",
       demo: "Demo mode: saved only in this browser.",
       by: "from",
+      captcha: "Please tick the \"I'm not a robot\" box.",
+      captchaFail: "The robot check didn't go through. Please tick it again.",
       calTitle: "Gabs' birthday"
     },
     es: {
       days: "días", hours: "horas", mins: "minutos", secs: "segundos",
       today: "¡Hoy es la fiesta!",
       sending: "Enviando…",
-      rsvpOk: "¡Gracias! Tu respuesta quedó guardada.",
+      rsvpOk: "¡Gracias! Recibimos tu respuesta.",
       songOk: "¡Agregada a la playlist!",
-      songDup: "Ya pediste una canción. ¡Una por invitado!",
+      songDup: "Ya pediste tu canción. ¡Solo una por persona!",
       noteOk: "Tu mensajito ya está en el muro. ¡Gracias!",
       notePending: "¡Gracias! Tu mensajito aparecerá cuando sea aprobado.",
-      err: "Algo salió mal. Intenta de nuevo en un momento.",
-      required: "Por favor completa los campos obligatorios.",
-      noSongs: "Aún no hay canciones. ¡Sé el primero!",
-      noNotes: "Aún no hay mensajitos. ¡Deja el primero!",
+      err: "Algo salió mal. Inténtalo de nuevo en un momento.",
+      required: "Por favor, completa los campos obligatorios.",
       demo: "Modo demo: se guarda solo en este navegador.",
       by: "de",
+      captcha: "Marca la casilla \"No soy un robot\".",
+      captchaFail: "La verificación no funcionó. Márcala de nuevo, por favor.",
       calTitle: "Cumpleaños de Gabs"
     }
   }[LANG];
@@ -87,22 +87,63 @@
   /* ==========================================================
      Splash + music
      ========================================================== */
-  const audio = new Audio(ROOT + (CFG.song || "assets/audio/song.mp3"));
-  audio.loop = true;
-  audio.preload = "auto";
   const musicBtn = $("#music-btn");
   const splash = $("#splash");
+  const music = CFG.youtubeId ? youtubeMusic(CFG.youtubeId) : mp3Music(ROOT + (CFG.song || "assets/audio/song.mp3"));
 
   function setMusicUi() {
     if (!musicBtn) return;
-    musicBtn.classList.toggle("paused", audio.paused);
-    musicBtn.setAttribute("aria-pressed", String(!audio.paused));
+    musicBtn.classList.toggle("paused", music.paused());
+    musicBtn.setAttribute("aria-pressed", String(!music.paused()));
   }
-  audio.addEventListener("play", setMusicUi);
-  audio.addEventListener("pause", setMusicUi);
+
+  // MP3 file in the repo
+  function mp3Music(src) {
+    const audio = new Audio(src);
+    audio.loop = true;
+    audio.preload = "auto";
+    audio.addEventListener("play", () => setMusicUi());
+    audio.addEventListener("pause", () => setMusicUi());
+    return {
+      play() { audio.play().catch(() => setMusicUi()); }, // missing file or blocked: stay silent
+      pause() { audio.pause(); },
+      paused() { return audio.paused; }
+    };
+  }
+
+  // Song streamed from YouTube in a hidden player (YouTube IFrame API)
+  function youtubeMusic(id) {
+    let player = null, ready = false, wantPlay = false, playing = false;
+    const box = document.createElement("div");
+    box.className = "yt-box";
+    box.setAttribute("aria-hidden", "true");
+    box.innerHTML = '<div id="yt-player"></div>';
+    document.body.appendChild(box);
+    const prev = window.onYouTubeIframeAPIReady;
+    window.onYouTubeIframeAPIReady = () => {
+      if (prev) prev();
+      player = new YT.Player("yt-player", {
+        width: 200, height: 200, videoId: id,
+        playerVars: { autoplay: 0, controls: 0, loop: 1, playlist: id, playsinline: 1, start: +CFG.youtubeStart || 0, rel: 0 },
+        events: {
+          onReady: () => { ready = true; player.setVolume(80); if (wantPlay) player.playVideo(); },
+          onStateChange: (e) => { playing = e.data === YT.PlayerState.PLAYING || e.data === YT.PlayerState.BUFFERING; setMusicUi(); }
+        }
+      });
+    };
+    const s = document.createElement("script");
+    s.src = "https://www.youtube.com/iframe_api";
+    s.async = true;
+    document.head.appendChild(s);
+    return {
+      play() { wantPlay = true; if (ready) player.playVideo(); },
+      pause() { wantPlay = false; if (ready) player.pauseVideo(); },
+      paused() { return !playing; }
+    };
+  }
 
   function enter(withMusic) {
-    if (withMusic) audio.play().catch(() => setMusicUi()); // missing file or blocked: stay silent
+    if (withMusic) music.play();
     splash.classList.add("gone");
     document.body.classList.remove("locked");
     musicBtn.hidden = false;
@@ -115,11 +156,12 @@
     $("#enter-silent").addEventListener("click", () => enter(false));
   }
   musicBtn && musicBtn.addEventListener("click", () => {
-    if (audio.paused) audio.play().catch(() => {}); else audio.pause();
+    if (music.paused()) music.play(); else music.pause();
   });
+  let resumeMusic = false;
   document.addEventListener("visibilitychange", () => {
-    if (document.hidden && !audio.paused) { audio.pause(); audio.dataset.resume = "1"; }
-    else if (!document.hidden && audio.dataset.resume) { delete audio.dataset.resume; audio.play().catch(() => {}); }
+    if (document.hidden && !music.paused()) { music.pause(); resumeMusic = true; }
+    else if (!document.hidden && resumeMusic) { resumeMusic = false; music.play(); }
   });
 
   /* ==========================================================
@@ -158,7 +200,7 @@
      Details from config
      ========================================================== */
   const start = new Date(CFG.start);
-  const end = new Date(CFG.end);
+  const end = CFG.end ? new Date(CFG.end) : new Date(start.getTime() + 4 * 3600e3);
   const locale = LANG === "es" ? "es" : "en-US";
   const fmt = (d, o) => isNaN(d) ? "" : new Intl.DateTimeFormat(locale, o).format(d);
   const cap = s => s.charAt(0).toUpperCase() + s.slice(1);
@@ -166,22 +208,28 @@
     date: cap(fmt(start, { day: "numeric", month: "long" })),
     weekday: cap(fmt(start, { weekday: "long" })) + " · " + fmt(start, { year: "numeric" }),
     time: fmt(start, { hour: "numeric", minute: "2-digit" }),
-    timeEnd: fmt(end, { hour: "numeric", minute: "2-digit" }),
-    dress: (CFG.dressCode || {})[LANG] || "",
-    dressNote: (CFG.dressNote || {})[LANG] || "",
+    timeEnd: CFG.end ? fmt(end, { hour: "numeric", minute: "2-digit" }) : "",
     venue: CFG.venueName || "",
     address: CFG.address || "",
     rsvpBy: cap(fmt(new Date(CFG.rsvpBy + "T12:00"), { day: "numeric", month: "long" })),
     fullDate: cap(fmt(start, { weekday: "long", day: "numeric", month: "long", year: "numeric" }))
   };
   $$("[data-cfg]").forEach(el => { const v = fill[el.dataset.cfg]; if (v) el.textContent = v; });
+  if (!fill.timeEnd) $$(".until").forEach(el => { el.hidden = true; });
 
   // Map and directions
-  const q = encodeURIComponent(CFG.mapQuery || CFG.address || "");
+  const q = encodeURIComponent(CFG.mapQuery || "");
   const map = $("#map");
-  if (map) map.src = `https://maps.google.com/maps?q=${q}&z=15&output=embed`;
-  const gmaps = $("#gmaps"); if (gmaps) gmaps.href = `https://www.google.com/maps/search/?api=1&query=${q}`;
-  const waze = $("#waze"); if (waze) waze.href = `https://waze.com/ul?q=${q}&navigate=yes`;
+  const gmaps = $("#gmaps");
+  const waze = $("#waze");
+  if (gmaps) gmaps.href = CFG.mapsUrl || `https://www.google.com/maps/search/?api=1&query=${q}`;
+  if (q) {
+    if (map) map.src = `https://maps.google.com/maps?q=${q}&z=15&output=embed`;
+    if (waze) waze.href = `https://waze.com/ul?q=${q}&navigate=yes`;
+  } else {
+    if (map) map.hidden = true;
+    if (waze) waze.hidden = true;
+  }
 
   // Add to calendar (.ics download, works with Apple, Google and Outlook)
   const calBtn = $("#add-cal");
@@ -234,6 +282,27 @@
   }
 
   /* ==========================================================
+     Night sky: twinkling stars + falling stars
+     ========================================================== */
+  $$(".sky").forEach(sky => {
+    const rnd = (a, b) => a + Math.random() * (b - a);
+    const frag = document.createDocumentFragment();
+    for (let i = 0; i < (+sky.dataset.stars || 60); i++) {
+      const s = document.createElement("i");
+      s.className = "star";
+      s.style.cssText = `left:${rnd(0, 100)}%;top:${rnd(0, 100)}%;--s:${rnd(1, 2.6).toFixed(1)}px;--o:${rnd(.35, 1).toFixed(2)};--d:${rnd(2, 6).toFixed(1)}s;animation-delay:-${rnd(0, 6).toFixed(1)}s`;
+      frag.appendChild(s);
+    }
+    for (let i = 0; i < (+sky.dataset.shooting || 3); i++) {
+      const s = document.createElement("b");
+      s.className = "shooting";
+      s.style.cssText = `top:${rnd(0, 45)}%;left:${rnd(35, 105)}%;--dur:${rnd(5, 9).toFixed(1)}s;animation-delay:${(i * 2.2 + rnd(0, 2)).toFixed(1)}s`;
+      frag.appendChild(s);
+    }
+    sky.appendChild(frag);
+  });
+
+  /* ==========================================================
      Wish list: one button to the external list (config.js)
      ========================================================== */
   const wishlist = $("#wishlist-link");
@@ -251,6 +320,25 @@
     new FormData(form).forEach((v, k) => { o[k] = String(v).trim(); });
     return o;
   }
+  /* reCAPTCHA v2 checkbox: one widget per form, only when a site key is set */
+  const CAPTCHA = !!CFG.recaptchaSiteKey;
+  const captchaIds = new Map();
+  if (CAPTCHA) {
+    window.gabsCaptchaReady = () => {
+      $$(".captcha").forEach(el => {
+        captchaIds.set(el.closest("form"), grecaptcha.render(el, { sitekey: CFG.recaptchaSiteKey }));
+      });
+    };
+    const s = document.createElement("script");
+    s.src = `https://www.google.com/recaptcha/api.js?onload=gabsCaptchaReady&render=explicit&hl=${LANG}`;
+    s.async = true; s.defer = true;
+    document.head.appendChild(s);
+  } else {
+    $$(".captcha").forEach(el => { el.hidden = true; });
+  }
+  const captchaToken = form => (CAPTCHA && window.grecaptcha && captchaIds.has(form)) ? grecaptcha.getResponse(captchaIds.get(form)) : "";
+  const captchaReset = form => { if (CAPTCHA && window.grecaptcha && captchaIds.has(form)) grecaptcha.reset(captchaIds.get(form)); };
+
   function handle(form, kind, onOk) {
     if (!form) return;
     const msg = $(".form-msg", form);
@@ -259,14 +347,21 @@
       ev.preventDefault();
       if (!form.checkValidity()) { form.reportValidity(); flash(msg, STR.required, "err"); return; }
       const data = formData(form);
+      delete data["g-recaptcha-response"];
+      if (CAPTCHA) {
+        data.captcha = captchaToken(form);
+        if (!data.captcha) { flash(msg, STR.captcha, "err"); return; }
+      }
       const label = btn.textContent;
       btn.disabled = true; btn.textContent = STR.sending; flash(msg, "");
       try {
         const r = await api.send(kind, data);
-        onOk(r, data, msg);
+        if (!r.ok && r.error === "captcha") flash(msg, STR.captchaFail, "err");
+        else onOk(r, data, msg);
       } catch (e) {
         flash(msg, STR.err, "err");
       } finally {
+        captchaReset(form);
         btn.disabled = false; btn.textContent = label;
       }
     });
@@ -303,7 +398,8 @@
     try {
       const items = await api.list("song");
       songList.innerHTML = "";
-      if (!items.length) { const li = document.createElement("li"); li.textContent = STR.noSongs; songList.appendChild(li); return; }
+      songList.hidden = !items.length;
+      if (!items.length) return;
       items.slice().reverse().forEach((s, i) => {
         const li = document.createElement("li");
         li.className = "reveal"; li.style.setProperty("--i", Math.min(i, 6));
@@ -331,7 +427,8 @@
     try {
       const items = await api.list("note");
       wall.innerHTML = "";
-      if (!items.length) { const p = document.createElement("p"); p.className = "wall-empty"; p.textContent = STR.noNotes; wall.appendChild(p); return; }
+      wall.hidden = !items.length;
+      if (!items.length) return;
       items.slice().reverse().forEach((n, i) => {
         const el = document.createElement("article");
         el.className = `note reveal c${i % 5}`;

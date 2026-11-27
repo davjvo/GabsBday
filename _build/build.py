@@ -77,6 +77,12 @@ TEXT = {
 }
 
 template = (HERE / "template.html").read_text(encoding="utf-8")
+# Cache-busting version: changes whenever styles, scripts or config change,
+# so returning guests never mix a new page with old cached files.
+import hashlib
+VER = hashlib.sha1(b"".join((SITE / f).read_bytes() for f in ("styles.css", "config.js", "main.js"))).hexdigest()[:8]
+for _t in TEXT.values():
+    _t["ver"] = VER
 keys = set(re.findall(r"\{\{(\w+)\}\}", template))
 for lang, t in TEXT.items():
     missing = keys - t.keys()

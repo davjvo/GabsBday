@@ -4,19 +4,20 @@
    and the Spanish page.
    ========================================================== */
 window.SITE_CONFIG = {
-  // Party start and end, in local time (YYYY-MM-DDTHH:MM). PLACEHOLDER
-  start: "2027-01-16T19:00",
-  end:   "2027-01-17T01:00",
+  // Party start (guest arrival), in local time (YYYY-MM-DDTHH:MM).
+  // Arrival is 8:30 PM. The DATE is still a PLACEHOLDER.
+  start: "2027-01-16T20:30",
+  // Optional end time. Leave "" to hide it (calendar uses 4 hours).
+  end: "",
 
-  // Dress code. PLACEHOLDER
-  dressCode: { en: "Garden party chic", es: "Garden party chic" },
-  dressNote: { en: "Florals welcome", es: "Flores bienvenidas" },
-
-  // Venue. PLACEHOLDER
+  // Venue. Name and address are PLACEHOLDERS.
   venueName: "Venue name",
   address: "Street 123, City",
-  // What to search on the map (venue name + address works best).
-  mapQuery: "Central Park, New York",
+  // The Google Maps link to the venue (used by the Google Maps button).
+  mapsUrl: "https://maps.app.goo.gl/XCZzVPmzWZvyFz377",
+  // Text to search for the embedded map and Waze (venue name + address
+  // works best). Leave "" to hide the embedded map and the Waze button.
+  mapQuery: "",
 
   // RSVP deadline (YYYY-MM-DD). PLACEHOLDER
   rsvpBy: "2027-01-05",
@@ -26,9 +27,17 @@ window.SITE_CONFIG = {
   // this browser, so you can try everything before setting up Sheets.
   endpoint: "",
 
-  // Link to the external wish list (Amazon, etc.). PLACEHOLDER
-  wishlistUrl: "https://example.com/gabs-wishlist",
+  // Link to the external wish list.
+  wishlistUrl: "https://www.elfster.com/w/gabbyp-vvdkbx/gabby-p-s-wish-list",
 
   // Song that plays after the guest taps "Open invitation".
-  song: "assets/audio/song.mp3"
+  // YouTube video id (the part after youtu.be/ or watch?v=). It streams
+  // from YouTube in a hidden player. Leave "" to use the MP3 below instead.
+  youtubeId: "1IvyGfWhoWo",
+  youtubeStart: 0, // start at this second
+  song: "assets/audio/song.mp3",
+
+  // Google reCAPTCHA v2 ("I'm not a robot" checkbox) site key.
+  // Leave "" to turn the captcha off. See SETUP.md, step 5.
+  recaptchaSiteKey: ""
 };

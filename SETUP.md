@@ -17,8 +17,10 @@ _build/           page text in both languages + the script that writes the two p
 
 ## 1. Fill in the details
 
-Open `config.js` and replace the placeholders: start and end time, dress code,
-venue, address, map search text, RSVP deadline, and the link to the wish list (`wishlistUrl`). Both pages
+Open `config.js` and replace the placeholders: date and arrival time, optional
+end time, venue name and address, map search text (`mapQuery`, which turns on the
+embedded map and the Waze button), the Google Maps link (`mapsUrl`), RSVP
+deadline, the wish list link (`wishlistUrl`) and the song (`youtubeId`). Both pages
 read from this one file, so dates and times show in the right language
 automatically.
 
@@ -30,12 +32,16 @@ Put these files in place (same names), and they replace the painted placeholders
 | --- | --- | --- |
 | `assets/img/hero.jpg` | Portada (full screen) | Landscape, about 2000px wide, under 500 KB |
 | `assets/img/venue.jpg` | Location section | Landscape |
-| `assets/img/about.jpg` | "About Gabs" | Portrait or square |
-| `assets/audio/song.mp3` | Plays after "Open invitation" | MP3 under 5 MB |
+| `assets/audio/song.mp3` | Only if `youtubeId` is empty: plays after "Open invitation" | MP3 under 5 MB |
+
+The song normally streams from YouTube (`youtubeId` in `config.js`). Browsers only
+allow sound after a tap, which is why the page opens with the "Open invitation"
+screen. On some phones YouTube may still refuse to start; guests can then tap the
+music button in the corner.
 
 ## 3. Change the page text (optional)
 
-The tagline, "About Gabs" text and every label live in `_build/build.py`,
+The tagline and every label live in `_build/build.py`,
 English and Spanish side by side. Edit there, then run from this folder:
 
 ```
@@ -61,8 +67,11 @@ saved only in your own browser.
    **Web app URL** (ends in `/exec`).
 5. Paste it into `config.js` as `endpoint: "https://script.google.com/macros/s/.../exec"`.
 
-The tabs RSVP, Notes, Songs and Gifts appear the first time someone sends
+The tabs RSVP, Notes and Songs appear the first time someone sends
 something. RSVP answers stay private in the Sheet; the site never shows them.
+
+The Sheet lives in your Google Drive. To get an Excel file at any time:
+**File > Download > Microsoft Excel (.xlsx)**.
 
 If you edit `Code.gs` later: **Deploy > Manage deployments > Edit > Version: New version**,
 so the same URL keeps working.
@@ -80,7 +89,25 @@ remembers the guest already asked. For a stricter rule, give each guest a
 personal link such as `https://yoursite/?g=ana-k7` (or `/es/?g=ana-k7`). The
 code is then used instead of the name, and it's also saved with their RSVP.
 
-## 5. Publish
+## 5. Turn on the captcha (reCAPTCHA)
+
+Every form (RSVP, song, note) gets an "I'm not a robot" checkbox, checked again
+by the Apps Script, so nobody can spam resubmissions.
+
+1. Go to https://www.google.com/recaptcha/admin/create.
+2. Type: **reCAPTCHA v2 > "I'm not a robot" Checkbox**.
+   Domains: `davjvo.github.io` (add `localhost` to test locally).
+3. You get two keys:
+   - **Site key**: paste it into `config.js` as `recaptchaSiteKey`.
+   - **Secret key**: in Apps Script open **Project Settings > Script Properties >
+     Add script property**, name `RECAPTCHA_SECRET`, value = the secret key.
+     Never put the secret key in `config.js` or anywhere on the site.
+4. Redeploy the Apps Script (**Deploy > Manage deployments > Edit > New version**).
+
+While `recaptchaSiteKey` is empty, no checkbox shows. While `RECAPTCHA_SECRET`
+is missing, the Apps Script accepts forms without checking.
+
+## 6. Publish
 
 GitHub Pages: create a repository, upload everything in this folder (except
 `_build` if you like), then **Settings > Pages > Deploy from branch > main**.

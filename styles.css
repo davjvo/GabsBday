@@ -35,6 +35,7 @@ body {
 }
 body.locked { overflow: hidden; }
 img { max-width: 100%; display: block; }
+[hidden] { display: none !important; }
 a { color: var(--blackthorn); }
 a:hover { color: var(--foxglove); }
 
@@ -63,22 +64,46 @@ section { position: relative; }
 .btn-row { display: flex; flex-wrap: wrap; gap: .8rem; justify-content: center; }
 
 /* ---------- icons ---------- */
-.flower, .icon { width: 1em; height: 1em; display: inline-block; }
+.icon, .star-icon { width: 1em; height: 1em; display: inline-block; }
 .icon { fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
 
 /* ---------- splash ---------- */
 .splash {
   position: fixed; inset: 0; z-index: 100;
   display: grid; place-items: center; text-align: center; padding: 2rem;
-  background: var(--hawthorn);
+  color: var(--hawthorn);
+  background:
+    radial-gradient(ellipse at 50% 115%, rgba(64, 101, 74, .85), transparent 60%),
+    linear-gradient(180deg, #16303a, var(--blackthorn));
+  overflow: hidden;
   transition: opacity .9s ease, visibility .9s ease;
 }
+.splash > div:not(.sky) { position: relative; z-index: 1; }
 .splash.gone { opacity: 0; visibility: hidden; }
-.splash .flower { font-size: 3.2rem; color: var(--foxglove); animation: spin 14s linear infinite; }
-.splash h1 { font-size: clamp(2.4rem, 7vw, 4.2rem); font-style: italic; color: var(--blackthorn); margin-top: 1.2rem; }
+.splash .star-icon { font-size: 3rem; color: var(--cowslip); filter: drop-shadow(0 0 14px rgba(228, 194, 89, .7)); animation: glow 3s ease-in-out infinite; }
+@keyframes glow { 50% { transform: scale(1.12); filter: drop-shadow(0 0 22px rgba(228, 194, 89, .95)); } }
+.splash h1 { font-size: clamp(2.4rem, 7vw, 4.2rem); font-style: italic; color: var(--hawthorn); margin-top: 1rem; }
 .splash p { margin: 0 0 2rem; }
-.splash .skip { display: block; margin-top: 1.2rem; background: none; border: 0; color: var(--blackthorn); opacity: .7; text-decoration: underline; cursor: pointer; font: inherit; font-size: .9rem; }
-.splash .lang { position: absolute; top: 1.2rem; right: 1.4rem; font-size: .85rem; letter-spacing: .1em; }
+.splash .skip { display: block; margin-top: 1.2rem; background: none; border: 0; color: var(--hawthorn); opacity: .75; text-decoration: underline; cursor: pointer; font: inherit; font-size: .9rem; }
+.splash .lang { position: absolute; z-index: 1; top: 1.2rem; right: 1.4rem; font-size: .85rem; letter-spacing: .1em; color: var(--hawthorn); }
+.splash .btn { background: var(--hawthorn); border-color: var(--hawthorn); color: var(--blackthorn); }
+.splash .btn:hover { background: var(--foxglove); border-color: var(--foxglove); color: var(--hawthorn); }
+
+/* ---------- night sky (stars added by main.js) ---------- */
+.sky { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
+.sky .star { position: absolute; width: var(--s); height: var(--s); border-radius: 50%; background: #fff; opacity: var(--o); animation: twinkle var(--d) ease-in-out infinite; }
+.sky .shooting {
+  position: absolute; width: 150px; height: 2px; border-radius: 2px; opacity: 0;
+  background: linear-gradient(90deg, #fff, rgba(228, 194, 89, .6) 30%, transparent);
+  animation: shoot var(--dur) linear infinite;
+}
+@keyframes twinkle { 50% { opacity: .12; } }
+@keyframes shoot {
+  0% { opacity: 0; transform: rotate(-32deg) translateX(0); }
+  2% { opacity: 1; }
+  14% { opacity: 0; transform: rotate(-32deg) translateX(-560px); }
+  100% { opacity: 0; transform: rotate(-32deg) translateX(-560px); }
+}
 
 /* ---------- top bar ---------- */
 .topbar {
@@ -125,7 +150,7 @@ section { position: relative; }
     url("assets/img/hero.jpg") center / cover no-repeat,
     radial-gradient(ellipse at 82% 18%, rgba(228, 194, 89, .45), transparent 45%),
     radial-gradient(ellipse at 12% 88%, rgba(237, 159, 119, .4), transparent 50%),
-    linear-gradient(160deg, var(--blackthorn) 10%, var(--ivy) 75%, var(--willow));
+    linear-gradient(175deg, #16303a 5%, var(--blackthorn) 45%, var(--ivy) 100%);
 }
 .hero-inner { position: relative; z-index: 1; padding: 6rem 1.5rem 4rem; }
 .hero .kicker { text-transform: uppercase; letter-spacing: .3em; font-size: .8rem; }
@@ -151,7 +176,7 @@ section { position: relative; }
 .band-gorse .btn:hover { background: var(--blackthorn); border-color: var(--blackthorn); color: var(--hawthorn); }
 
 /* ---------- details cards ---------- */
-.cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.6rem; max-width: 900px; margin: 0 auto; }
+.cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.6rem; max-width: 620px; margin: 0 auto; }
 .card {
   background: #fff; border-radius: var(--radius); overflow: hidden; text-align: center;
   box-shadow: 0 10px 30px rgba(34, 70, 83, .07);
@@ -214,6 +239,8 @@ fieldset.field { border: 0; padding: 0; margin: 0; }
 .choices input:checked + span { background: var(--blackthorn); color: var(--hawthorn); }
 .choices input:focus-visible + span { border-color: var(--ivy); }
 .form .btn { justify-self: center; margin-top: .4rem; }
+.captcha { justify-self: center; min-height: 78px; }
+.yt-box { position: fixed; left: -9999px; top: 0; width: 200px; height: 200px; overflow: hidden; pointer-events: none; }
 .form-msg { text-align: center; min-height: 1.6em; margin: 0; font-weight: 600; }
 .form-msg.ok { color: var(--ivy); }
 .form-msg.err { color: var(--rowan); }
@@ -247,21 +274,6 @@ fieldset.field { border: 0; padding: 0; margin: 0; }
 .note.c2 { background: #F7ECC6; }
 .note.c3 { background: #E3E8D4; }
 .note.c4 { background: #E6EBED; }
-.wall-empty { text-align: center; opacity: .7; }
-
-/* ---------- about ---------- */
-.about { display: grid; grid-template-columns: 1fr 1fr; align-items: stretch; background: #fff; }
-.about-img {
-  min-height: 420px;
-  background:
-    url("assets/img/about.jpg") center / cover no-repeat,
-    radial-gradient(ellipse at 75% 20%, rgba(228, 194, 89, .5), transparent 50%),
-    linear-gradient(150deg, var(--willow), var(--ivy));
-}
-.about-text { padding: clamp(2.5rem, 6vw, 5rem); align-self: center; }
-.about-text h2 { text-align: left; color: var(--copper); }
-.about-text p { max-width: 46ch; }
-@media (max-width: 760px) { .about { grid-template-columns: 1fr; } .about-img { min-height: 320px; } }
 
 /* ---------- footer ---------- */
 .site-footer { background: var(--blackthorn); color: var(--hawthorn); text-align: center; padding: 3.5rem 1rem 4.5rem; }

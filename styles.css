@@ -179,7 +179,8 @@ section { position: relative; }
 }
 .card:hover { transform: translateY(-6px); box-shadow: 0 18px 40px rgba(119, 5, 35, .12); }
 .card .card-top { aspect-ratio: 4 / 3; display: grid; place-items: center; font-size: 3.6rem; }
-.card:nth-child(1) .card-top { background: var(--petrol); color: var(--cream); }
+.card:nth-child(1) .card-top { background: var(--petrol) url("assets/img/date.jpg") center / cover no-repeat; color: var(--cream); }
+.card:nth-child(1) .card-top .icon { box-sizing: content-box; padding: .32em; border-radius: 50%; background: var(--petrol); box-shadow: 0 6px 18px rgba(2, 80, 84, .35); }
 .card:nth-child(2) .card-top { background: var(--orange); color: var(--cream); }
 .card:nth-child(3) .card-top { background: var(--pistachio); color: var(--burgundy); }
 .card .dress-link { color: var(--burgundy); text-decoration: underline; text-underline-offset: 3px; }
@@ -194,10 +195,10 @@ section { position: relative; }
 
 /* ---------- location ---------- */
 .location-photo {
-  min-height: 0; display: flex; align-items: flex-end; color: var(--cream);
+  min-height: clamp(460px, 56vw, 720px); display: flex; align-items: flex-end; color: var(--cream);
   background:
-    linear-gradient(180deg, transparent 30%, rgba(119, 5, 35, .7)),
-    url("assets/img/venue.jpg") center / cover no-repeat,
+    linear-gradient(180deg, transparent 35%, rgba(119, 5, 35, .85)),
+    url("assets/img/venue.jpg") center 40% / cover no-repeat,
     linear-gradient(160deg, var(--burgundy), var(--petrol));
 }
 .location-photo .wrap { padding: clamp(3.5rem, 8vw, 5.5rem) 0; }
@@ -261,6 +262,15 @@ fieldset.field { border: 0; padding: 0; margin: 0; }
 .song-list li small { margin-left: auto; opacity: .8; white-space: nowrap; }
 
 /* ---------- wall ---------- */
+#wall {
+  background:
+    linear-gradient(rgba(248, 246, 236, .4), rgba(248, 246, 236, .4)),
+    url("assets/img/note-bg.jpg") center / cover no-repeat,
+    var(--cream);
+}
+#wall .wrap > h2, #wall .wrap > .eyebrow { text-shadow: 0 0 18px var(--cream), 0 0 6px var(--cream); }
+#wall .eyebrow { opacity: 1; }
+#wall .wall-form { background: rgba(248, 246, 236, .92); padding: 1.6rem; border-radius: var(--radius); box-shadow: 0 10px 30px rgba(2, 80, 84, .18); }
 .wall-form { max-width: 560px; margin: 0 auto 3rem; }
 .wall-form .field input, .wall-form .field textarea { background: #fff; }
 .wall { columns: 3 260px; column-gap: 1.4rem; }

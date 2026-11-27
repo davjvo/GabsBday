@@ -40,7 +40,7 @@ TEXT = {
         "songListLabel": "Requested songs",
         "wallTitle": "leave her a note", "wallEyebrow": "for the birthday girl",
         "fMessage": "Your message", "fMessagePh": "Write something sweet…", "wallButton": "Pin it to the wall",
-        "footerLove": "Made with love by Jose",
+        "footerLove": "Made with love by Ksimerito",
     },
     "es": {
         "lang": "es", "root": "../", "altHref": "../", "altLang": "en", "altLabel": "English version", "altShort": "EN",
@@ -72,7 +72,7 @@ TEXT = {
         "songListLabel": "Canciones pedidas",
         "wallTitle": "déjale un mensajito", "wallEyebrow": "para la cumpleañera",
         "fMessage": "Tu mensaje", "fMessagePh": "Escribe algo bonito…", "wallButton": "Pegarlo en el muro",
-        "footerLove": "Hecho con amor por Jose",
+        "footerLove": "Hecho con amor por Ksimerito",
     },
 }
 

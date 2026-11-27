@@ -5,8 +5,8 @@
    ========================================================== */
 window.SITE_CONFIG = {
   // Party start (guest arrival), in local time (YYYY-MM-DDTHH:MM).
-  // Arrival is 8:30 PM. The DATE is still a PLACEHOLDER.
-  start: "2027-01-16T20:30",
+  // Friday, January 15, 2027, arrival at 8:30 PM.
+  start: "2027-01-15T20:30",
   // Optional end time. Leave "" to hide it (calendar uses 4 hours).
   end: "",
 

@@ -190,13 +190,13 @@ section { position: relative; }
 
 /* ---------- location ---------- */
 .location-photo {
-  min-height: 70vh; display: flex; align-items: flex-end; color: var(--cream);
+  min-height: 0; display: flex; align-items: flex-end; color: var(--cream);
   background:
     linear-gradient(180deg, transparent 30%, rgba(119, 5, 35, .7)),
     url("assets/img/venue.jpg") center / cover no-repeat,
     linear-gradient(160deg, var(--burgundy), var(--petrol));
 }
-.location-photo .wrap { padding: 3.5rem 0; }
+.location-photo .wrap { padding: clamp(3.5rem, 8vw, 5.5rem) 0; }
 .location-photo h2 { text-align: left; color: var(--cream); }
 .location-photo .eyebrow { text-align: left; color: var(--cream); margin-bottom: .6rem; }
 .location-photo p { max-width: 36ch; font-size: 1.1rem; margin: 0 0 1.4rem; }
